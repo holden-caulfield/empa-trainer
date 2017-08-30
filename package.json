@@ -6,7 +6,8 @@
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-scripts": "1.0.12",
-    "soundfont-player": "^0.10.6"
+    "soundfont-player": "^0.10.6",
+    "tonal": "^0.69.9"
   },
   "scripts": {
     "start": "react-scripts start",
