@@ -7,18 +7,39 @@ import './App.css'
 
 const ac = new AudioContext()
 
-const renderInterval = (interval) =>
+const renderInterval = (interval, answer, onAnswer) =>
   <div>
     <p>Root Note: {interval[0]}</p>
-    <p>Name: {intervallic(interval)}</p>
+    { answer ? renderResult(interval, answer) : renderInput(onAnswer)}
+  </div>
+
+const renderResult = (interval, answer) => {
+  const intervalName = intervallic(interval)[0]
+  const correct = intervalName === answer
+  const renderCorrect = <p>Name: {answer} <span className='correct'>Correct!</span></p>
+  const renderWrong = <p>Name: <span className='wrong'>{answer} </span>{intervalName}</p>
+  return <div> 
+    { correct ? renderCorrect : renderWrong }
     <p>Note: {interval[1]}</p>
   </div>
+}
+
+const renderInput = (onAnswer) => 
+  <div>
+    <p>
+      Name: 
+      <input type='text' id='answer'/>
+      <button type='button' onClick={onAnswer}>Send</button>
+    </p>
+  </div>
+
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      interval: null
+      interval: null,
+      answer: null
     };
   }
 
@@ -31,12 +52,17 @@ class App extends Component {
           piano.play(note, ac.currentTime + index, {duration: 1})
         }       
       )
-      this.setState({interval})      
+      this.setState({interval, answer: null})      
     })
-  }  
+  }
+  
+  sendAnswer = () => {
+    const answer = document.getElementById('answer').value
+    this.setState({answer})
+  }
 
   render() {
-    const { interval } = this.state
+    const { interval, answer } = this.state
     return (
       <div className="App">
         <div className="App-header">
@@ -47,7 +73,7 @@ class App extends Component {
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
         <button onClick={this.playInterval}>Give me a 3rd interval!</button>
-        { interval && renderInterval(interval)}
+        { interval && renderInterval(interval, answer, this.sendAnswer)}
       </div>
     )
   }

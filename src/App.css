@@ -18,6 +18,15 @@
   font-size: large;
 }
 
+.correct {
+  color: green
+}
+
+.wrong {
+  color: #660000;
+  text-decoration: line-through;
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
