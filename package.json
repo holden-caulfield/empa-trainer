@@ -8,15 +8,19 @@
     "react-redux": "^5.0.6",
     "react-scripts": "1.0.12",
     "redux": "^3.7.2",
+    "redux-observable": "^0.16.0",
     "reduxsauce": "^0.6.0",
+    "rxjs": "^5.4.3",
     "soundfont-player": "^0.10.6",
     "tonal": "^0.69.9"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "react-scripts test --env=jsdom --setupTestFrameworkScriptFile=./testBootstrap.js",
     "eject": "react-scripts eject"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "web-audio-test-api": "^0.5.2"
+  }
 }
