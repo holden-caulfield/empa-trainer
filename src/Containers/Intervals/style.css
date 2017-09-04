@@ -1,0 +1,9 @@
+.correct {
+  color: green
+}
+  
+.wrong {
+  color: #660000;
+  text-decoration: line-through;
+}
+  
