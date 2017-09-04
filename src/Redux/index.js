@@ -7,15 +7,8 @@ const rootReducer = combineReducers({
   intervals
 })
 
-const rootEpic = combineEpics(
-  intervalsEpic
-)
+const rootEpic = combineEpics(intervalsEpic)
 
-const middlewares = [
-  createEpicMiddleware(rootEpic)
-]
+const middlewares = [createEpicMiddleware(rootEpic)]
 
-export default () => createStore(
-  rootReducer,
-  applyMiddleware(...middlewares)
-)
+export default () => createStore(rootReducer, applyMiddleware(...middlewares))
