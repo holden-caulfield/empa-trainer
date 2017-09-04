@@ -1,6 +1,6 @@
 import { createReducer, createActions } from 'reduxsauce'
-import { randomInterval } from '../../lib/music'
-import { playInterval } from '../../lib/player'
+import { randomInterval } from 'lib/music'
+import { playInterval } from 'lib/player'
 import 'rxjs/add/operator/do'
 import 'rxjs/add/operator/mapTo'
 

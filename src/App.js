@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Intervals from './Containers/Intervals'
+import Intervals from 'Containers/Intervals'
 
 class App extends Component {
   render = () => (

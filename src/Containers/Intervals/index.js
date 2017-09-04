@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import IntervalsActions from '../../Redux/Intervals'
+import IntervalsActions from 'Redux/Intervals'
 import './style.css'
 
 const renderInterval = (interval, answer, onAnswer) => (
