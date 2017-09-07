@@ -2,57 +2,33 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import IntervalsActions from 'Redux/Intervals'
 import Button from 'Components/Button'
+import Note from 'Components/Note'
+import Result from 'Components/Result'
 import IntervalPicker from 'Components/IntervalPicker'
 import './style.css'
-
-const renderResult = (interval, answer) => {
-  const correct = interval.name === answer
-  const renderCorrect = (
-    <p>
-      Name: {answer} <span className="correct">Correct!</span>
-    </p>
-  )
-  const renderWrong = (
-    <p>
-      Name: <span className="wrong">{answer} </span>
-      {interval.name}
-    </p>
-  )
-  return (
-    <div>
-      {correct ? renderCorrect : renderWrong}
-      <p>Note: {interval.noteTo}</p>
-    </div>
-  )
-}
-
-const renderInput = (intervalRange, onAnswer) => (
-  <IntervalPicker
-    possibleIntervals={intervalRange}
-    onIntervalSelected={onAnswer}
-  />
-)
+import Icon from 'react-fontawesome'
 
 class Intervals extends Component {
-  renderInterval = () => {
-    const { interval, answer, intervalRange, sendAnswer } = this.props
-    return (
-      <div>
-        <p>Nota: {interval.noteFrom}</p>
-        {answer ? (
-          renderResult(interval, answer)
-        ) : (
-          renderInput(intervalRange, sendAnswer)
-        )}
-      </div>
-    )
-  }
-
   render = () => {
-    const { ready, startTest } = this.props
+    const {
+      interval,
+      ready,
+      answer,
+      intervalRange,
+      startTest,
+      sendAnswer
+    } = this.props
     return (
       <div id="intervalsContainer">
-        {ready && this.renderInterval()}
+        {interval && <Note note={interval.noteFrom} />}
+        {ready && (
+          <IntervalPicker
+            possibleIntervals={intervalRange}
+            onIntervalSelected={sendAnswer}
+          />
+        )}
+        {answer && <Result answer={answer} test={interval.name} />}
+        {answer && <Note note={interval.noteTo} />}
         <Button onClick={startTest}>Nuevo Intervalo</Button>
       </div>
     )

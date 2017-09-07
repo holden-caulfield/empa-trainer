@@ -5,12 +5,14 @@ import styled from 'styled-components'
 const IntervalPickerContainer = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
+  width: 80%;
 `
 
 const IntervalButton = Button.extend`
-  width: 50px;
-  height: 50px;
+  width: 15vw;
+  height: 15vw;
+  font-size: 5vw;
 `
 
 export default class IntervalPicker extends Component {

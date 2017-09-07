@@ -32,7 +32,7 @@ const start = state => ({
   ready: false
 })
 
-const answer = (state, { answer }) => ({ ...state, answer })
+const answer = (state, { answer }) => ({ ...state, answer, ready: false })
 
 const ready = state => ({ ...state, ready: true })
 

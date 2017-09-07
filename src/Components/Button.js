@@ -10,7 +10,8 @@ export default styled.button.attrs({
 })`
   border: 1px solid;
   border-radius: 5px;
-  padding: 10px;
+  padding: 2vw;
+  font-size: 3vw;
   background-color: ${makeBackground};
   border-color: ${propsColor};
   color: ${propsColor};
