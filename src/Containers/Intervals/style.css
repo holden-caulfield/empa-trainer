@@ -1,9 +1,18 @@
 .correct {
-  color: green
+  color: green;
 }
-  
+
 .wrong {
   color: #660000;
   text-decoration: line-through;
 }
-  
+
+#intervalsContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  background-color: lightgray;
+}

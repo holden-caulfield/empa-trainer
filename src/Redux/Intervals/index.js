@@ -7,6 +7,7 @@ import 'rxjs/add/operator/mapTo'
 /* ------------- Initial State ------------- */
 
 const INITIAL_STATE = {
+  intervalRange: ['3M', '3m', '-3M', '-3m'],
   interval: null,
   answer: null,
   ready: false
@@ -25,7 +26,8 @@ export default Creators
 /* ------------- Reducers ------------- */
 
 const start = state => ({
-  interval: randomInterval(),
+  ...state,
+  interval: randomInterval(state.intervalRange),
   answer: null,
   ready: false
 })

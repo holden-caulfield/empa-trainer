@@ -1,14 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import IntervalsActions from 'Redux/Intervals'
+import Button from 'Components/Button'
+import IntervalPicker from 'Components/IntervalPicker'
 import './style.css'
-
-const renderInterval = (interval, answer, onAnswer) => (
-  <div>
-    <p>Root Note: {interval.noteFrom}</p>
-    {answer ? renderResult(interval, answer) : renderInput(onAnswer)}
-  </div>
-)
 
 const renderResult = (interval, answer) => {
   const correct = interval.name === answer
@@ -31,30 +26,34 @@ const renderResult = (interval, answer) => {
   )
 }
 
-const renderInput = onAnswer => (
-  <div>
-    <p>
-      Name:
-      <input type="text" id="answer" />
-      <button
-        type="button"
-        onClick={() => {
-          onAnswer(document.getElementById('answer').value)
-        }}
-      >
-        Send
-      </button>
-    </p>
-  </div>
+const renderInput = (intervalRange, onAnswer) => (
+  <IntervalPicker
+    possibleIntervals={intervalRange}
+    onIntervalSelected={onAnswer}
+  />
 )
 
 class Intervals extends Component {
-  render = () => {
-    const { interval, answer, startTest, sendAnswer } = this.props
+  renderInterval = () => {
+    const { interval, answer, intervalRange, sendAnswer } = this.props
     return (
       <div>
-        <button onClick={startTest}>Give me a 3rd interval!</button>
-        {interval && renderInterval(interval, answer, sendAnswer)}
+        <p>Nota: {interval.noteFrom}</p>
+        {answer ? (
+          renderResult(interval, answer)
+        ) : (
+          renderInput(intervalRange, sendAnswer)
+        )}
+      </div>
+    )
+  }
+
+  render = () => {
+    const { ready, startTest } = this.props
+    return (
+      <div id="intervalsContainer">
+        {ready && this.renderInterval()}
+        <Button onClick={startTest}>Nuevo Intervalo</Button>
       </div>
     )
   }
