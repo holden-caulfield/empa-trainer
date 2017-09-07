@@ -7,7 +7,7 @@ import 'rxjs/add/operator/mapTo'
 /* ------------- Initial State ------------- */
 
 const INITIAL_STATE = {
-  intervalRange: ['3M', '3m', '-3M', '-3m'],
+  intervalRange: ['3M', '3m', '-3M', '-3m', '4P', '-4P', '5P', '-5P'],
   interval: null,
   answer: null,
   ready: false

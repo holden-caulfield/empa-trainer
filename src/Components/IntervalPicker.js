@@ -4,14 +4,16 @@ import styled from 'styled-components'
 
 const IntervalPickerContainer = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-flow: row wrap;
   justify-content: space-around;
+  align-content: space-between;
   width: 80%;
 `
 
 const IntervalButton = Button.extend`
   width: 15vw;
   height: 15vw;
+  margin: 1vw;
   font-size: 5vw;
 `
 

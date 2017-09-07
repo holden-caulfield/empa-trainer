@@ -6,7 +6,6 @@ import Note from 'Components/Note'
 import Result from 'Components/Result'
 import IntervalPicker from 'Components/IntervalPicker'
 import './style.css'
-import Icon from 'react-fontawesome'
 
 class Intervals extends Component {
   render = () => {
