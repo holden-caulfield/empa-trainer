@@ -2,7 +2,10 @@ import Actions, { reducer } from './index'
 
 describe('reducer', () => {
   it('adds a random interval when exercise starts', () => {
-    const { interval } = reducer({}, Actions.start())
+    const { interval } = reducer(
+      { intervalRange: ['2da', '6ta'] },
+      Actions.start()
+    )
     expect(interval).not.toBeNull()
   })
 
@@ -15,7 +18,11 @@ describe('reducer', () => {
   })
 
   it('properly resets state when restarted', () => {
-    const state = { interval: ['G3', 'D3'], answer: '3M' }
+    const state = {
+      intervalRange: ['3ra'],
+      interval: ['G3', 'D3'],
+      answer: '3M'
+    }
     const { interval, answer } = reducer(state, Actions.start())
     expect(interval).not.toBeNull()
     expect(answer).toBeNull()

@@ -1,5 +1,5 @@
 import { createReducer, createActions } from 'reduxsauce'
-import { randomInterval } from 'lib/music'
+import { randomInterval, intervalOptions, expandIntervalSets } from 'lib/music'
 import { playInterval } from 'lib/player'
 import 'rxjs/add/operator/do'
 import 'rxjs/add/operator/mapTo'
@@ -7,7 +7,7 @@ import 'rxjs/add/operator/mapTo'
 /* ------------- Initial State ------------- */
 
 const INITIAL_STATE = {
-  intervalRange: ['3M', '3m', '-3M', '-3m', '4P', '-4P', '5P', '-5P'],
+  intervalRange: intervalOptions,
   interval: null,
   answer: null,
   ready: false
@@ -55,3 +55,6 @@ export const epic = (action$, store) =>
     .mapTo(Creators.ready())
 
 /* ------------- Selectors ------------- */
+
+export const expandSelectedIntervals = state =>
+  expandIntervalSets(state.intervals.intervalRange, false)

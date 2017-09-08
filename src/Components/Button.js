@@ -1,9 +1,10 @@
 import styled from 'styled-components'
 import chroma from 'chroma-js'
 
-const makeBackground = props => chroma(props.color).luminance(0.7)
+const makeBackground = ({ selected, color }) =>
+  selected ? color : chroma(color).luminance(0.7)
 
-const propsColor = props => props.color
+const mainColor = ({ selected, color }) => (selected ? 'white' : color)
 
 export default styled.button.attrs({
   color: props => props.color || 'green'
@@ -13,10 +14,10 @@ export default styled.button.attrs({
   padding: 2vw;
   font-size: 3vw;
   background-color: ${makeBackground};
-  border-color: ${propsColor};
-  color: ${propsColor};
+  border-color: ${props => props.color};
+  color: ${mainColor};
   &:hover {
-    background-color: ${propsColor};
+    background-color: ${props => props.color};
     color: white;
   }
 `

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import IntervalsActions from 'Redux/Intervals'
+import IntervalsActions, { expandSelectedIntervals } from 'Redux/Intervals'
 import Button from 'Components/Button'
 import Note from 'Components/Note'
 import Result from 'Components/Result'
@@ -13,7 +13,7 @@ class Intervals extends Component {
       interval,
       ready,
       answer,
-      intervalRange,
+      possibleIntervals,
       startTest,
       sendAnswer
     } = this.props
@@ -22,7 +22,7 @@ class Intervals extends Component {
         {interval && <Note note={interval.noteFrom} />}
         {ready && (
           <IntervalPicker
-            possibleIntervals={intervalRange}
+            possibleIntervals={possibleIntervals}
             onIntervalSelected={sendAnswer}
           />
         )}
@@ -34,7 +34,11 @@ class Intervals extends Component {
   }
 }
 
-const mapStateToProps = state => state.intervals
+const mapStateToProps = state => ({
+  ...state.intervals,
+  possibleIntervals: expandSelectedIntervals(state)
+})
+
 const mapDispatchToProps = {
   startTest: IntervalsActions.start,
   sendAnswer: IntervalsActions.answer
