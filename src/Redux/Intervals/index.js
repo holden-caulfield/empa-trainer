@@ -18,6 +18,7 @@ const INITIAL_STATE = {
 const { Types, Creators } = createActions({
   start: null,
   ready: null,
+  replay: null,
   answer: ['answer']
 })
 
@@ -48,7 +49,7 @@ export const reducer = createReducer(INITIAL_STATE, {
 
 export const epic = (action$, store) =>
   action$
-    .ofType(Types.START)
+    .ofType(Types.START, Types.REPLAY)
     .do(() => {
       playInterval(store.getState().intervals.interval)
     })

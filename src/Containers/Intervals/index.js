@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import Icon from 'react-fontawesome'
 import IntervalsActions, { expandSelectedIntervals } from 'Redux/Intervals'
 import Button from 'Components/Button'
 import Note from 'Components/Note'
@@ -14,12 +15,20 @@ class Intervals extends Component {
       ready,
       answer,
       possibleIntervals,
+      replay,
       startTest,
       sendAnswer
     } = this.props
     return (
       <div id="intervalsContainer">
-        {interval && <Note note={interval.noteFrom} />}
+        <div>
+          {interval && <Note note={interval.noteFrom} />}
+          {ready && (
+            <Button onClick={replay}>
+              <Icon name="play" /> De nuevo!
+            </Button>
+          )}
+        </div>
         {ready && (
           <IntervalPicker
             possibleIntervals={possibleIntervals}
@@ -41,7 +50,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   startTest: IntervalsActions.start,
-  sendAnswer: IntervalsActions.answer
+  sendAnswer: IntervalsActions.answer,
+  replay: IntervalsActions.replay
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Intervals)
