@@ -24,7 +24,7 @@ class Intervals extends Component {
         <div>
           {interval && <Note note={interval.noteFrom} />}
           {ready && (
-            <Button onClick={replay}>
+            <Button color="darkblue" onClick={replay}>
               <Icon name="play" /> De nuevo!
             </Button>
           )}

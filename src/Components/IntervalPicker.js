@@ -62,7 +62,7 @@ export default class IntervalPicker extends Component {
         <IntervalsContainer>
           {possibleIntervals.map(interval => (
             <IntervalButton
-              color="darkblue"
+              color="black"
               key={interval}
               onClick={() => this.setQuality(interval)}
               selected={interval === quality(this.state)}
@@ -73,14 +73,14 @@ export default class IntervalPicker extends Component {
         </IntervalsContainer>
         <DirectionContainer>
           <IntervalButton
-            color="orange"
+            color="black"
             selected={this.state.dir === 1}
             onClick={() => this.setDirection(1)}
           >
             <Icon name="arrow-up" />
           </IntervalButton>
           <IntervalButton
-            color="orange"
+            color="black"
             selected={this.state.dir === -1}
             onClick={() => this.setDirection(-1)}
           >
