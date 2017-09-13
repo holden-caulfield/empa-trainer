@@ -22,8 +22,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test":
-      "react-scripts test --env=jsdom --setupTestFrameworkScriptFile=./testBootstrap.js",
+    "test": "react-scripts test --env=jsdom --setupTestFrameworkScriptFile=./testBootstrap.js",
     "eject": "react-scripts eject",
     "prettier": "prettier --write \"src/**/*.{js,jsx}\"",
     "precommit": "lint-staged",
@@ -35,10 +34,15 @@
     "husky": "^0.14.3",
     "lint-staged": "^4.1.0",
     "prettier": "^1.6.1",
+    "reactotron-react-js": "^1.12.2",
+    "reactotron-redux": "^1.12.2",
     "web-audio-test-api": "^0.5.2"
   },
   "lint-staged": {
-    "src/**/*.{js,jsx,json,css}": ["prettier --write", "git add"]
+    "src/**/*.{js,jsx,json,css}": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "prettier": {
     "singleQuote": true,

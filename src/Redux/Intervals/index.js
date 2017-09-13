@@ -7,6 +7,7 @@ import 'rxjs/add/operator/mapTo'
 /* ------------- Initial State ------------- */
 
 const INITIAL_STATE = {
+  phase: 'CONFIG',
   intervalRange: intervalOptions,
   interval: null,
   answer: null,
@@ -16,18 +17,26 @@ const INITIAL_STATE = {
 /* ------------- Types and Action Creators ------------- */
 
 const { Types, Creators } = createActions({
+  setIntervalRange: ['intervalRange'],
   start: null,
   ready: null,
   replay: null,
-  answer: ['answer']
+  answer: ['answer'],
+  stop: null
 })
 
 export default Creators
 
 /* ------------- Reducers ------------- */
 
+const setIntervalRange = (state, { intervalRange }) => ({
+  ...state,
+  intervalRange
+})
+
 const start = state => ({
   ...state,
+  phase: 'TEST',
   interval: randomInterval(state.intervalRange),
   answer: null,
   ready: false
@@ -37,12 +46,16 @@ const answer = (state, { answer }) => ({ ...state, answer, ready: false })
 
 const ready = state => ({ ...state, ready: true })
 
+const stop = state => ({ ...state, phase: 'CONFIG' })
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
+  [Types.SET_INTERVAL_RANGE]: setIntervalRange,
   [Types.START]: start,
   [Types.ANSWER]: answer,
-  [Types.READY]: ready
+  [Types.READY]: ready,
+  [Types.STOP]: stop
 })
 
 /* ------------- Epics ------------- */

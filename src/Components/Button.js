@@ -6,6 +6,8 @@ const makeBackground = ({ selected, color }) =>
 
 const mainColor = ({ selected, color }) => (selected ? 'white' : color)
 
+const makeBox = ({ color }) => `0px 0px 5px ${color}`
+
 export default styled.button.attrs({
   color: props => props.color || 'green'
 })`
@@ -17,7 +19,9 @@ export default styled.button.attrs({
   border-color: ${props => props.color};
   color: ${mainColor};
   &:hover {
-    background-color: ${props => props.color};
-    color: white;
+    box-shadow: ${makeBox};
+  }
+  &:focus {
+    outline: none;
   }
 `

@@ -6,6 +6,7 @@ import createStore from './Redux'
 import registerServiceWorker from './registerServiceWorker'
 import App from './App'
 import './index.css'
+import 'Config/Reactotron'
 
 const store = createStore()
 
