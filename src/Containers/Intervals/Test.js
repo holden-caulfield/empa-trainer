@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Icon from 'react-fontawesome'
 import IntervalsActions, { expandSelectedIntervals } from 'Redux/Intervals'
+import MainPanel from 'Components/Panels'
 import Button from 'Components/Button'
 import Note from 'Components/Note'
 import Result from 'Components/Result'
@@ -20,15 +21,13 @@ class IntervalsTest extends Component {
       stopTest
     } = this.props
     return (
-      <div>
-        <div>
-          {interval && <Note note={interval.noteFrom} />}
-          {ready && (
-            <Button color="darkblue" onClick={replay}>
-              <Icon name="play" /> De nuevo!
-            </Button>
-          )}
-        </div>
+      <MainPanel>
+        {interval && <Note note={interval.noteFrom} />}
+        {ready && (
+          <Button color="darkblue" onClick={replay}>
+            <Icon name="play" /> De nuevo!
+          </Button>
+        )}
         {ready && (
           <IntervalPicker
             possibleIntervals={possibleIntervals}
@@ -38,8 +37,10 @@ class IntervalsTest extends Component {
         {answer && <Result answer={answer} test={interval.name} />}
         {answer && <Note note={interval.noteTo} />}
         <Button onClick={nextInterval}>Siguiente</Button>
-        <Button onClick={stopTest}>Terminar</Button>
-      </div>
+        <Button color="palevioletred" onClick={stopTest}>
+          Terminar
+        </Button>
+      </MainPanel>
     )
   }
 }

@@ -8,13 +8,14 @@ const mainColor = ({ selected, color }) => (selected ? 'white' : color)
 
 const makeBox = ({ color }) => `0px 0px 5px ${color}`
 
-export default styled.button.attrs({
+const Button = styled.button.attrs({
   color: props => props.color || 'green'
 })`
   border: 1px solid;
   border-radius: 5px;
-  padding: 2vw;
-  font-size: 3vw;
+  padding: 15px;
+  width: 90%;
+  font-size: 18px;
   background-color: ${makeBackground};
   border-color: ${props => props.color};
   color: ${mainColor};
@@ -25,3 +26,12 @@ export default styled.button.attrs({
     outline: none;
   }
 `
+
+export const PickerButton = Button.extend`
+  width: 70px;
+  height: 70px;
+  margin: 5px;
+  font-size: 15px;
+`
+
+export default Button

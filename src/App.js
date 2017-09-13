@@ -3,8 +3,12 @@ import Intervals from 'Containers/Intervals'
 
 class App extends Component {
   render = () => (
-    <div className="App">
-      <Intervals />
+    <div id="mainContainer" role="main">
+      <div id="leftPanel" />
+      <div id="mainPanel">
+        <Intervals />
+      </div>
+      <div id="rightPanel" />
     </div>
   )
 }

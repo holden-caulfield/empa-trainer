@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Config from './Config'
 import Test from './Test'
-import './style.css'
+import MainPanel from 'Components/Panels'
 
 class Intervals extends Component {
   render = () => {
@@ -16,7 +16,7 @@ class Intervals extends Component {
           return <Config />
       }
     }
-    return <div id="intervalsContainer">{renderPhase(phase)}</div>
+    return <MainPanel>{renderPhase(phase)}</MainPanel>
   }
 }
 

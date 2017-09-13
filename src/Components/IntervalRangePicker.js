@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
-import Button from 'Components/Button'
+import { PickerButton } from 'Components/Button'
 import { intervalOptions } from 'lib/music'
+import styled from 'styled-components'
 import { without } from 'ramda'
 
-const IntervalSetButton = Button.extend`
-  width: 10vw;
-  height: 10vw;
-  margin: 1vw;
-  font-size: 3vw;
+const ButtonPanel = styled.div`
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
 `
 
 export default class IntervalPicker extends Component {
@@ -23,18 +23,18 @@ export default class IntervalPicker extends Component {
     }
 
     return (
-      <div>
+      <ButtonPanel>
         {intervalOptions.map(intervalSet => (
-          <IntervalSetButton
+          <PickerButton
             color="black"
             key={intervalSet}
             onClick={clickHandler(intervalSet)}
             selected={isSelected(intervalSet)}
           >
             {intervalSet}
-          </IntervalSetButton>
+          </PickerButton>
         ))}
-      </div>
+      </ButtonPanel>
     )
   }
 }

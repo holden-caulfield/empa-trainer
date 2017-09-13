@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Button from 'Components/Button'
+import { PickerButton } from 'Components/Button'
 import styled from 'styled-components'
 import Icon from 'react-fontawesome'
 import { props, fromProps } from 'tonal-interval'
@@ -13,6 +13,7 @@ const IntervalPickerContainer = styled.div`
   align-content: space-between;
   width: 80%;
 `
+
 const IntervalsContainer = styled.div`
   display: flex;
   flex-flow: row wrap;
@@ -26,13 +27,6 @@ const DirectionContainer = styled.div`
   flex-grow: 1;
   flex-direction: column;
   justify-content: center;
-`
-
-const IntervalButton = Button.extend`
-  width: 15vw;
-  height: 15vw;
-  margin: 1vw;
-  font-size: 5vw;
 `
 
 export default class IntervalPicker extends Component {
@@ -61,31 +55,31 @@ export default class IntervalPicker extends Component {
       <IntervalPickerContainer>
         <IntervalsContainer>
           {possibleIntervals.map(interval => (
-            <IntervalButton
+            <PickerButton
               color="black"
               key={interval}
               onClick={() => this.setQuality(interval)}
               selected={interval === quality(this.state)}
             >
               {interval}
-            </IntervalButton>
+            </PickerButton>
           ))}
         </IntervalsContainer>
         <DirectionContainer>
-          <IntervalButton
+          <PickerButton
             color="black"
             selected={this.state.dir === 1}
             onClick={() => this.setDirection(1)}
           >
             <Icon name="arrow-up" />
-          </IntervalButton>
-          <IntervalButton
+          </PickerButton>
+          <PickerButton
             color="black"
             selected={this.state.dir === -1}
             onClick={() => this.setDirection(-1)}
           >
             <Icon name="arrow-down" />
-          </IntervalButton>
+          </PickerButton>
         </DirectionContainer>
       </IntervalPickerContainer>
     )
