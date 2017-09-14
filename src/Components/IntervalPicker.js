@@ -43,7 +43,6 @@ export default class IntervalPicker extends Component {
   stateComplete = () => none(isNil, values(this.state))
 
   componentDidUpdate() {
-    console.log(this.state)
     if (this.stateComplete()) {
       this.props.onIntervalSelected(fromProps(this.state))
     }
