@@ -30,8 +30,8 @@ const Button = styled.button.attrs({
 export const PickerButton = Button.extend`
   width: 70px;
   height: 70px;
-  margin: 5px;
   font-size: 15px;
+  margin: 10px 10px 0 0;
 `
 
 export default Button

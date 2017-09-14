@@ -7,8 +7,11 @@ import { without } from 'ramda'
 const ButtonPanel = styled.div`
   display: flex;
   flex-flow: row wrap;
-  justify-content: center;
+  width: 100%;
+  justify-content: space-between;
 `
+
+const FieldContainer = styled.div`width: 90%;`
 
 export default class IntervalPicker extends Component {
   render() {
@@ -23,18 +26,21 @@ export default class IntervalPicker extends Component {
     }
 
     return (
-      <ButtonPanel>
-        {intervalOptions.map(intervalSet => (
-          <PickerButton
-            color="black"
-            key={intervalSet}
-            onClick={clickHandler(intervalSet)}
-            selected={isSelected(intervalSet)}
-          >
-            {intervalSet}
-          </PickerButton>
-        ))}
-      </ButtonPanel>
+      <FieldContainer>
+        <h2>Incluir intervalos de:</h2>
+        <ButtonPanel>
+          {intervalOptions.map(intervalSet => (
+            <PickerButton
+              color="black"
+              key={intervalSet}
+              onClick={clickHandler(intervalSet)}
+              selected={isSelected(intervalSet)}
+            >
+              {intervalSet}
+            </PickerButton>
+          ))}
+        </ButtonPanel>
+      </FieldContainer>
     )
   }
 }
