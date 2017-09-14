@@ -12,7 +12,7 @@ export const randomNote = (range = 'C3 B4') => randomPick(chromatic(range))
 const intervalSets = {
   '2da': ['2m', '2M'],
   '3ra': ['3m', '3M'],
-  '4/5': ['4P', '5P'],
+  '4/5': ['4P', '4A', '5P'],
   '6ta': ['6m', '6M'],
   '7ma': ['7m', '7M'],
   '8va': ['8P']
