@@ -3,7 +3,7 @@ import { shuffle } from 'tonal-array'
 import { pc } from 'tonal-note'
 import { transpose } from 'tonal-transpose'
 import { head, tail, chain } from 'ramda'
-import { fromProps } from 'tonal-interval'
+import { props, fromProps } from 'tonal-interval'
 
 const randomPick = list => shuffle(list)[0]
 
@@ -18,7 +18,17 @@ const intervalSets = {
   '8va': ['8P']
 }
 
-export const quality = interval => fromProps({ ...interval, dir: 1 })
+const lift = interval =>
+  typeof interval === 'string' ? props(interval) : interval
+
+const quality = interval => fromProps({ ...lift(interval), dir: 1 })
+
+const direction = interval => lift(interval).dir
+
+export const interval = {
+  quality,
+  direction
+}
 
 export const expandIntervalSets = (sets, ascDes = true) =>
   chain(

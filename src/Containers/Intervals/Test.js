@@ -5,7 +5,6 @@ import IntervalsActions, { expandSelectedIntervals } from 'Redux/Intervals'
 import MainPanel from 'Components/Panels'
 import Button from 'Components/Button'
 import Note from 'Components/Note'
-import Result from 'Components/Result'
 import IntervalPicker from 'Components/IntervalPicker'
 
 class IntervalsTest extends Component {
@@ -22,22 +21,20 @@ class IntervalsTest extends Component {
     } = this.props
     return (
       <MainPanel>
-        {interval && <Note note={interval.noteFrom} />}
+        <Note note={interval.noteFrom} />
         {ready && (
           <Button color="darkblue" onClick={replay}>
             <Icon name="play" /> De nuevo!
           </Button>
         )}
-        {ready && (
-          <IntervalPicker
-            possibleIntervals={possibleIntervals}
-            onIntervalSelected={sendAnswer}
-          />
-        )}
-        {answer && <Result answer={answer} test={interval.name} />}
-        {answer && <Note note={interval.noteTo} />}
+        <IntervalPicker
+          possibleIntervals={possibleIntervals}
+          onIntervalSelected={sendAnswer}
+          interval={interval}
+          answer={answer}
+        />
         <Button onClick={nextInterval}>Siguiente</Button>
-        <Button color="palevioletred" onClick={stopTest}>
+        <Button color="crimson" onClick={stopTest}>
           Terminar
         </Button>
       </MainPanel>

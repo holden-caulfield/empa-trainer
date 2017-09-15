@@ -22,6 +22,9 @@ const Button = styled.button.attrs({
   &:hover {
     box-shadow: ${makeBox};
   }
+  &:disabled {
+    box-shadow: none !important;
+  }
   &:focus {
     outline: none;
   }
