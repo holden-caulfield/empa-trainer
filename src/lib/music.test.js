@@ -24,7 +24,7 @@ describe('expandIntervalSets', () => {
 describe('randomInterval', () => {
   it('always picks an interval from the given sets', () => {
     const result = M.randomInterval(['4/5', '8va'])
-    const possibleIntervals = ['4P', '-4P', '5P', '-5P', '8P', '-8P']
+    const possibleIntervals = ['4P', '4A', '-4P', '5P', '-5P', '8P', '-8P']
     expect(possibleIntervals).toContain(result.name)
   })
 })

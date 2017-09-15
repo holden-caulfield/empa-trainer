@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { PickerButton } from 'Components/Button'
 import { intervalOptions } from 'lib/music'
 import styled from 'styled-components'
-import { without } from 'ramda'
+import { without, identity, sortBy } from 'ramda'
 
 const ButtonPanel = styled.div`
   display: flex;
@@ -21,7 +21,7 @@ export default class IntervalPicker extends Component {
       onSelectRange(
         isSelected(intervalSet)
           ? without([intervalSet], selected)
-          : [...selected, intervalSet]
+          : sortBy(identity, [...selected, intervalSet])
       )
     }
 
