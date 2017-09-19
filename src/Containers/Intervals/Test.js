@@ -4,7 +4,7 @@ import Icon from 'react-fontawesome'
 import IntervalsActions, { expandSelectedIntervals } from 'Redux/Intervals'
 import MainPanel from 'Components/Panels'
 import Button from 'Components/Button'
-import Note from 'Components/Note'
+import Notes from 'Components/Notes'
 import IntervalPicker from 'Components/IntervalPicker'
 
 class IntervalsTest extends Component {
@@ -21,7 +21,11 @@ class IntervalsTest extends Component {
     } = this.props
     return (
       <MainPanel>
-        <Note note={interval.noteFrom} />
+        <Notes
+          notes={
+            answer ? [interval.noteFrom, interval.noteTo] : [interval.noteFrom]
+          }
+        />
         {ready && (
           <Button color="darkblue" onClick={replay}>
             <Icon name="play" /> De nuevo!

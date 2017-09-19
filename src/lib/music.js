@@ -62,3 +62,20 @@ export const toItalian = note => {
   const pitch = pc(note)
   return `${notesMap[head(pitch)]}${tail(pitch)}`
 }
+
+export const altToAccidental = alt => {
+  switch (alt) {
+    case -2:
+      return 'bb'
+    case -1:
+      return 'b'
+    case 0:
+      return 'n'
+    case 1:
+      return '#'
+    case 2:
+      return '##'
+    default:
+      return null
+  }
+}

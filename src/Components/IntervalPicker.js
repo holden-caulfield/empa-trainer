@@ -70,8 +70,7 @@ export default class IntervalPicker extends Component {
 
   render() {
     const { possibleIntervals, answer } = this.props
-    console.log(this.state)
-    console.log(answer)
+
     return (
       <IntervalPickerContainer>
         <IntervalsContainer>

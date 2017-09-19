@@ -17,7 +17,8 @@
     "rxjs": "^5.4.3",
     "soundfont-player": "^0.10.6",
     "styled-components": "^2.1.2",
-    "tonal": "^0.69.9"
+    "tonal": "^0.69.9",
+    "vexflow": "^1.2.84"
   },
   "scripts": {
     "start": "react-scripts start",
