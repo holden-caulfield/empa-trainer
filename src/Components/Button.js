@@ -19,6 +19,7 @@ const Button = styled.button.attrs({
   background-color: ${makeBackground};
   border-color: ${props => props.color};
   color: ${mainColor};
+  align-self: center;
   &:hover {
     box-shadow: ${makeBox};
   }

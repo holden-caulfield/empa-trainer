@@ -1,17 +1,15 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import Icon from 'react-fontawesome'
 import IntervalsActions, { expandSelectedIntervals } from 'Redux/Intervals'
 import MainPanel from 'Components/Panels'
 import Button from 'Components/Button'
-import Notes from 'Components/Notes'
 import IntervalPicker from 'Components/IntervalPicker'
+import Interval from 'Components/Interval'
 
 class IntervalsTest extends Component {
   render = () => {
     const {
       interval,
-      ready,
       answer,
       possibleIntervals,
       replay,
@@ -21,16 +19,12 @@ class IntervalsTest extends Component {
     } = this.props
     return (
       <MainPanel>
-        <Notes
+        <Interval
           notes={
             answer ? [interval.noteFrom, interval.noteTo] : [interval.noteFrom]
           }
+          replay={replay}
         />
-        {ready && (
-          <Button color="darkblue" onClick={replay}>
-            <Icon name="play" /> De nuevo!
-          </Button>
-        )}
         <IntervalPicker
           possibleIntervals={possibleIntervals}
           onIntervalSelected={sendAnswer}
