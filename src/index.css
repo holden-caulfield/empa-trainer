@@ -5,16 +5,13 @@ body {
   overflow-x: hidden;
 }
 
-.correct {
-  color: green;
-}
-
-.wrong {
-  color: #660000;
-}
-
 #mainContainer {
-  display: block;
+  display: flex;
+  flex-direction: row;
+}
+
+#mainPanel {
+  flex-grow: 1;
 }
 
 #leftPanel {
@@ -27,86 +24,69 @@ body {
 
 #leftPanel,
 #rightPanel {
-  position: absolute;
-  width: 50vw;
-  min-height: 100vh;
-
-  /*
-    This is a trick to improve performance on newer versions of Chrome
-    #perfmatters
-  */
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-
-  -webkit-transition: -webkit-transform 0.4s ease-out;
-  transition: transform 0.4s ease-out;
-
-  z-index: 1;
+  width: 320px;
+  height: 100vh;
+  overflow-y: scroll;
 }
 
-#leftPanel {
-  /*
-  Using translate3d as a trick to improve performance on older versions of Chrome
-  See: http://aerotwist.com/blog/on-translate3d-and-layer-creation-hacks/
-  #perfmatters
-  */
-  -webkit-transform: translate(-50vw, 0);
-  transform: translate(-50vw, 0);
-}
-
-#mainPanel {
-  width: 100%;
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-#rightPanel {
-  left: 100%;
-}
-
-#leftPanel.open {
-  -webkit-transform: translate(0, 0);
-  transform: translate(0, 0);
-}
-
-#rightPanel.open {
-  -webkit-transform: translate(-50vw, 0);
-  transform: translate(-50vw, 0);
-}
-
-@media (min-width: 500px) {
-  /* If the screen is wider then 500px, use Flexbox */
-  #mainContainer {
-    display: -webkit-flex;
-    display: flex;
-    -webkit-flex-flow: row nowrap;
-    flex-flow: row nowrap;
-  }
+@media (max-width: 500px) {
   #leftPanel {
-    position: relative;
-    -webkit-transition: none 0s ease-out;
-    transition: none 0s ease-out;
-    -webkit-transform: translate(0, 0);
-    transform: translate(0, 0);
+    width: 320px;
+    position: fixed;
+    z-index: 200;
+    -webkit-transition: -webkit-transform 0.3s;
+    transition: transform 0.3s;
+    overflow-y: scroll;
+    top: 0;
+    left: 0;
+    -webkit-transform: translateX(-320px);
+    -ms-transform: translateX(-320px);
+    transform: translateX(-320px);
   }
-  #mainPanel {
-    position: static;
+  #leftPanel.open {
+    -webkit-transform: translateX(0);
+    -ms-transform: translateX(0);
+    transform: translateX(0);
   }
 }
 
-@media (min-width: 800px) {
-  body {
-    overflow-x: auto;
-  }
+@media (max-width: 800px) {
   #rightPanel {
-    position: relative;
-    left: auto;
-    -webkit-transition: none 0s ease-out;
-    transition: none 0s ease-out;
-    -webkit-transform: translate(0, 0);
-    transform: translate(0, 0);
+    width: 320px;
+    position: fixed;
+    z-index: 200;
+    -webkit-transition: -webkit-transform 0.3s;
+    transition: transform 0.3s;
+    overflow-y: scroll;
+    top: 0;
+    right: 0;
+    -webkit-transform: translateX(320px);
+    -ms-transform: translateX(320px);
+    transform: translateX(320px);
+  }
+
+  #rightPanel.open {
+    -webkit-transform: translateX(0);
+    -ms-transform: translateX(0);
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 320px) {
+  #leftPanel,
+  #rightPanel {
+    width: 100%;
+  }
+
+  #rightPanel {
+    -webkit-transform: translateX(100%);
+    -ms-transform: translateX(100%);
+    transform: translateX(100%);
+  }
+
+  #leftPanel {
+    -webkit-transform: translateX(-100%);
+    -ms-transform: translateX(-100%);
+    transform: translateX(-100%);
   }
 }
