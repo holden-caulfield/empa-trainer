@@ -8,7 +8,7 @@ const IntervalContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  width: 100%;
+  width: center;
 `
 
 const ReplayButton = Button.extend`width: auto;`

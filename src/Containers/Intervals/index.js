@@ -16,12 +16,7 @@ class Intervals extends Component {
           return <Config />
       }
     }
-    return (
-      <MainPanel>
-        <h1>Intervalos</h1>
-        {renderPhase(phase)}
-      </MainPanel>
-    )
+    return <MainPanel>{renderPhase(phase)}</MainPanel>
   }
 }
 

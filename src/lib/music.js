@@ -7,7 +7,7 @@ import { props, fromProps } from 'tonal-interval'
 
 const randomPick = list => shuffle(list)[0]
 
-export const randomNote = (range = 'C3 B4') => randomPick(chromatic(range))
+export const randomNote = (range = 'C4 B5') => randomPick(chromatic(range))
 
 const intervalSets = {
   '2da': ['2m', '2M'],

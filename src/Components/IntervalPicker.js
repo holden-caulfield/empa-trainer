@@ -9,9 +9,12 @@ import { interval as ivl } from 'lib/music'
 const IntervalPickerContainer = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
   align-content: space-between;
   width: 80%;
+  @media (max-width: 500px) {
+    width: 100%;
+  }
 `
 
 const IntervalsContainer = styled.div`

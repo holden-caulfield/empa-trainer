@@ -43,7 +43,7 @@ export default class Notes extends Component {
     context.setFont('Arial', 10, '').setBackgroundFillStyle('#eed')
 
     this.renderer.resize(200, 200)
-    this.stave = new VF.Stave(10, 40, 180)
+    this.stave = new VF.Stave(10, 44, 180)
 
     // Add a clef and time signature.
     this.stave.addClef('treble')
