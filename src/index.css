@@ -2,7 +2,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 #mainContainer {
@@ -12,6 +12,9 @@ body {
 
 #mainPanel {
   flex-grow: 1;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 #leftPanel {
@@ -24,12 +27,12 @@ body {
 
 #leftPanel,
 #rightPanel {
-  width: 320px;
+  flex: 0 0 320px;
   height: 100vh;
   overflow-y: scroll;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 720px) {
   #leftPanel {
     width: 320px;
     position: fixed;
@@ -50,7 +53,7 @@ body {
   }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1040px) {
   #rightPanel {
     width: 320px;
     position: fixed;

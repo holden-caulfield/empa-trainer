@@ -1,16 +1,38 @@
 import React, { Component } from 'react'
 import Intervals from 'Containers/Intervals'
+import NavBar from 'Components/NavBar'
+import { connect } from 'react-redux'
+import PanelsActions from 'Redux/Panels'
 
 class App extends Component {
-  render = () => (
-    <div id="mainContainer" role="main">
-      <div id="leftPanel" />
-      <div id="mainPanel">
-        <Intervals />
+  render = () => {
+    return (
+      <div id="mainContainer" role="main">
+        <div
+          id="leftPanel"
+          onClick={this.props.clear}
+          className={this.props.left}
+        />
+        <div id="mainPanel">
+          <NavBar
+            title="Intervalos"
+            onLeftIcon={this.props.openLeft}
+            onRightIcon={this.props.openRight}
+          />
+          <div id="container">
+            <Intervals />
+          </div>
+        </div>
+        <div
+          id="rightPanel"
+          onClick={this.props.clear}
+          className={this.props.right}
+        />
       </div>
-      <div id="rightPanel" />
-    </div>
-  )
+    )
+  }
 }
 
-export default App
+const mapStateToProps = state => state.panels
+
+export default connect(mapStateToProps, PanelsActions)(App)
