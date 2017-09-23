@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Config from './Config'
 import Test from './Test'
-import MainPanel from 'Components/Panels'
 
 class Intervals extends Component {
   render = () => {

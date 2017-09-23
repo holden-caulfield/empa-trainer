@@ -13,10 +13,10 @@ const NavBarContainer = styled.div`
   justify-content: center;
   align-items: center;
   border-bottom: 1px solid black;
-  @media (max-width: 1040px) {
+  @media (max-width: 720px) {
     right: 0;
   }
-  @media (max-width: 720px) {
+  @media (max-width: 1040px) {
     left: 0;
   }
 `
@@ -38,12 +38,12 @@ const MenuIcon = styled(Icon)`
 `
 
 const LeftIcon = MenuIcon.extend`
-  @media (max-width: 720px) {
+  @media (max-width: 1040px) {
     visibility: visible;
   }
 `
 const RightIcon = MenuIcon.extend`
-  @media (max-width: 1040px) {
+  @media (max-width: 720px) {
     visibility: visible;
   }
 `

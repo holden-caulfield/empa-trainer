@@ -41,13 +41,14 @@ export const expandIntervalSets = (sets, ascDes = true) =>
 
 export const intervalOptions = Object.keys(intervalSets)
 
-export const randomInterval = intervalSets => {
-  const intervals = expandIntervalSets(intervalSets)
-  const noteFrom = randomNote(),
-    name = randomPick(intervals),
-    noteTo = transpose(noteFrom, name)
-  return { noteFrom, noteTo, name }
-}
+export const randomInterval = intervalSets =>
+  intervalFrom(randomNote(), randomPick(expandIntervalSets(intervalSets)))
+
+export const intervalFrom = (note, name) => ({
+  noteFrom: note,
+  name: name,
+  noteTo: transpose(note, name)
+})
 
 const notesMap = {
   A: 'La',

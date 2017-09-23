@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Intervals from 'Containers/Intervals'
+import IntervalsProgress from 'Containers/Intervals/Progress'
 import NavBar from 'Components/NavBar'
 import { connect } from 'react-redux'
 import PanelsActions from 'Redux/Panels'
@@ -27,7 +28,9 @@ class App extends Component {
           id="rightPanel"
           onClick={this.props.clear}
           className={this.props.right}
-        />
+        >
+          <IntervalsProgress />
+        </div>
       </div>
     )
   }

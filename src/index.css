@@ -18,11 +18,13 @@ body {
 }
 
 #leftPanel {
-  background-color: grey;
+  background-color: white;
+  border-right: 1px solid black;
 }
 
 #rightPanel {
-  background-color: grey;
+  background-color: white;
+  border-left: 1px solid black;
 }
 
 #leftPanel,
@@ -32,7 +34,7 @@ body {
   overflow-y: scroll;
 }
 
-@media (max-width: 720px) {
+@media (max-width: 1040px) {
   #leftPanel {
     width: 320px;
     position: fixed;
@@ -53,7 +55,7 @@ body {
   }
 }
 
-@media (max-width: 1040px) {
+@media (max-width: 720px) {
   #rightPanel {
     width: 320px;
     position: fixed;

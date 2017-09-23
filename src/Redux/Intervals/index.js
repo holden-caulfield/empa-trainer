@@ -1,6 +1,7 @@
 import { createReducer, createActions } from 'reduxsauce'
 import { randomInterval, intervalOptions, expandIntervalSets } from 'lib/music'
 import { playInterval } from 'lib/player'
+import { append, filter } from 'ramda'
 import 'rxjs/add/operator/do'
 import 'rxjs/add/operator/mapTo'
 
@@ -11,7 +12,8 @@ const INITIAL_STATE = {
   intervalRange: intervalOptions,
   interval: null,
   answer: null,
-  ready: false
+  ready: false,
+  history: []
 }
 
 /* ------------- Types and Action Creators ------------- */
@@ -37,16 +39,24 @@ const setIntervalRange = (state, { intervalRange }) => ({
 const start = state => ({
   ...state,
   phase: 'TEST',
-  interval: randomInterval(state.intervalRange),
+  ready: false,
   answer: null,
-  ready: false
+  interval: randomInterval(state.intervalRange)
 })
 
-const answer = (state, { answer }) => ({ ...state, answer })
+const answer = (state, { answer }) => ({
+  ...state,
+  answer,
+  history: append({ interval: state.interval, answer: answer }, state.history)
+})
 
 const ready = state => ({ ...state, ready: true })
 
-const stop = state => ({ ...state, phase: 'CONFIG' })
+const stop = state => ({
+  ...INITIAL_STATE,
+  intervalRange: state.intervalRange,
+  phase: 'CONFIG'
+})
 
 /* ------------- Hookup Reducers To Types ------------- */
 
@@ -72,3 +82,12 @@ export const epic = (action$, store) =>
 
 export const expandSelectedIntervals = state =>
   expandIntervalSets(state.intervals.intervalRange, false)
+
+export const progressStats = state => {
+  const { history } = state.intervals
+  const answerOk = ({ interval, answer }) => answer === interval.name
+  return {
+    total: history.length,
+    correct: filter(answerOk, history).length
+  }
+}
