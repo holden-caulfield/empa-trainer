@@ -1,41 +1,28 @@
 import React, { Component } from 'react'
-import Intervals from 'Containers/Intervals'
-import IntervalsProgress from 'Containers/Intervals/Progress'
-import NavBar from 'Components/NavBar'
-import { connect } from 'react-redux'
-import PanelsActions from 'Redux/Panels'
+import Pages from 'Pages'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import MainLayout from 'Layouts/MainLayout'
 
-class App extends Component {
+const renderPage = page => () => {
+  const { component, props } = page
+  return <MainLayout mainContent={component} {...props} />
+}
+
+export default class App extends Component {
   render = () => {
     return (
-      <div id="mainContainer" role="main">
-        <div
-          id="leftPanel"
-          onClick={this.props.clear}
-          className={this.props.left}
-        />
-        <div id="mainPanel">
-          <NavBar
-            title="Intervalos"
-            onLeftIcon={this.props.openLeft}
-            onRightIcon={this.props.openRight}
-          />
-          <div id="container">
-            <Intervals />
-          </div>
-        </div>
-        <div
-          id="rightPanel"
-          onClick={this.props.clear}
-          className={this.props.right}
-        >
-          <IntervalsProgress />
-        </div>
-      </div>
+      <Router>
+        <Switch>
+          {Pages.map(page => (
+            <Route
+              key={page.name}
+              path={page.route}
+              render={renderPage(page)}
+            />
+          ))}
+          <Route key="root" exact path="/" render={renderPage(Pages[0])} />
+        </Switch>
+      </Router>
     )
   }
 }
-
-const mapStateToProps = state => state.panels
-
-export default connect(mapStateToProps, PanelsActions)(App)

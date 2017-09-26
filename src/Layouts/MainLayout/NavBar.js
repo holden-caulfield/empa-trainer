@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import Icon from 'react-fontawesome'
 
-const NavBarContainer = styled.div`
+const NavBarContainer = styled.header`
   display: flex;
   left: 320px;
   right: 320px;
@@ -21,7 +21,7 @@ const NavBarContainer = styled.div`
   }
 `
 
-const TitleContainer = styled.div`
+const TitleContainer = styled.h1`
   flex-grow: 1;
   font-size: 20px;
   font-weight: bold;

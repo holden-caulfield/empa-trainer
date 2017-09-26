@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Config from './Config'
 import Test from './Test'
+import IntervalsProgress from './Progress'
 
 class Intervals extends Component {
   render = () => {
@@ -24,3 +25,9 @@ const mapStateToProps = state => ({
 })
 
 export default connect(mapStateToProps)(Intervals)
+
+class IntervalsInfo extends Component {
+  render = () => (this.props.phase === 'TEST' ? <IntervalsProgress /> : null)
+}
+
+export const Info = connect(mapStateToProps)(IntervalsInfo)
