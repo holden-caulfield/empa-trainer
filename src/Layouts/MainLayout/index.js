@@ -6,7 +6,7 @@ import NavBar from './NavBar'
 
 class MainLayout extends Component {
   static defaultProps = {
-    infoSection: null
+    infoSection: () => null
   }
   render = () => (
     <div id="mainContainer" role="main">
