@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Pages from 'Pages'
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -16,7 +17,7 @@ const renderPage = page => () => {
 export default class App extends Component {
   render = () => {
     return (
-      <Router>
+      <Router basename={process.env.PUBLIC_URL}>
         <Switch>
           {Pages.map(page => (
             <Route
