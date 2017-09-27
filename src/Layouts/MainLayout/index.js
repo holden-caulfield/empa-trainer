@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import PanelsActions from 'Redux/Panels'
 import NavMenu from './NavMenu'
 import NavBar from './NavBar'
+import { withRouter } from 'react-router-dom'
 
 class MainLayout extends Component {
   static defaultProps = {
@@ -38,4 +39,4 @@ class MainLayout extends Component {
 
 const mapStateToProps = state => state.panels
 
-export default connect(mapStateToProps, PanelsActions)(MainLayout)
+export default withRouter(connect(mapStateToProps, PanelsActions)(MainLayout))

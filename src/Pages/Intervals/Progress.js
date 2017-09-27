@@ -25,9 +25,9 @@ const PercentLabel = ({ value }) => {
 
 class IntervalsProgress extends Component {
   render = () => {
-    const { correct, total, phase } = this.props
+    const { correct, total } = this.props
     const percentage = correct / total
-    return phase === 'TEST' && total > 0 ? (
+    return total > 0 ? (
       <ProgressContainer>
         <PercentLabel value={percentage} />
         <StatsLabel>
@@ -39,8 +39,7 @@ class IntervalsProgress extends Component {
 }
 
 const mapStateToProps = state => ({
-  ...progressStats(state),
-  phase: state.intervals.phase
+  ...progressStats(state)
 })
 
 export default connect(mapStateToProps)(IntervalsProgress)

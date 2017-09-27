@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Route, Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 import Pages from 'Pages'
 
@@ -16,7 +16,7 @@ const NavHeader = styled.header`
   border-bottom: 1px solid black;
 `
 
-const NavItem = styled(Link)`
+const NavItem = styled(NavLink)`
   height: 40px;
   line-height: 40px;
   text-decoration: none;
@@ -35,15 +35,9 @@ export default class Menu extends Component {
     <NavContainer>
       <NavHeader>EMPA Trainer</NavHeader>
       {Pages.map(page => (
-        <Route
-          key={page.name}
-          path={page.route}
-          children={({ match }) => (
-            <NavItem to={page.route} className={match ? 'selected' : ''}>
-              {page.props.title}
-            </NavItem>
-          )}
-        />
+        <NavItem key={page.name} to={page.route} activeClassName="selected">
+          {page.props.title}
+        </NavItem>
       ))}
     </NavContainer>
   )

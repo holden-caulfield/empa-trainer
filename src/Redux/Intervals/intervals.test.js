@@ -20,10 +20,10 @@ describe('reducer', () => {
 
   it('answer is stored on the progress history', () => {
     const interval = ivl('G3', '5P')
-    const state = { interval, history: [] }
-    const { history } = reducer(state, Actions.answer('3M'))
-    expect(history).toHaveLength(1)
-    expect(history[0]).toMatchObject({ interval, answer: '3M' })
+    const state = { interval, historic: [] }
+    const { historic } = reducer(state, Actions.answer('3M'))
+    expect(historic).toHaveLength(1)
+    expect(historic[0]).toMatchObject({ interval, answer: '3M' })
   })
 
   it('properly resets state when stopped', () => {
@@ -53,7 +53,7 @@ describe('reducer', () => {
 describe('progressStats selector', () => {
   const sampleStateWithHistory = {
     intervals: {
-      history: [
+      historic: [
         { interval: ivl('G3', '5P'), answer: '4P' },
         { interval: ivl('C3', '3M'), answer: '3M' },
         { interval: ivl('C3', '-3M'), answer: '3M' },

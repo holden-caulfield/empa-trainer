@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import IntervalsActions, { expandSelectedIntervals } from 'Redux/Intervals'
 import MainPanel from 'Components/Panels'
 import Button from 'Components/Button'
@@ -7,6 +8,9 @@ import IntervalPicker from 'Components/IntervalPicker'
 import Interval from 'Components/Interval'
 
 class IntervalsTest extends Component {
+  stop = () => {
+    this.props.history.replace('/intervals')
+  }
   render = () => {
     const {
       interval,
@@ -14,10 +18,9 @@ class IntervalsTest extends Component {
       possibleIntervals,
       replay,
       nextInterval,
-      sendAnswer,
-      stopTest
+      sendAnswer
     } = this.props
-    return (
+    return interval ? (
       <MainPanel>
         <Interval
           notes={
@@ -32,10 +35,12 @@ class IntervalsTest extends Component {
           answer={answer}
         />
         <Button onClick={nextInterval}>Siguiente</Button>
-        <Button color="crimson" onClick={stopTest}>
+        <Button color="crimson" onClick={this.stop}>
           Terminar
         </Button>
       </MainPanel>
+    ) : (
+      <Redirect to="/intervals" />
     )
   }
 }
@@ -48,8 +53,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   nextInterval: IntervalsActions.start,
   sendAnswer: IntervalsActions.answer,
-  replay: IntervalsActions.replay,
-  stopTest: IntervalsActions.stop
+  replay: IntervalsActions.replay
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(IntervalsTest)

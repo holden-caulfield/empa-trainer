@@ -8,12 +8,11 @@ import 'rxjs/add/operator/mapTo'
 /* ------------- Initial State ------------- */
 
 const INITIAL_STATE = {
-  phase: 'CONFIG',
   intervalRange: intervalOptions,
   interval: null,
   answer: null,
   ready: false,
-  history: []
+  historic: []
 }
 
 /* ------------- Types and Action Creators ------------- */
@@ -38,7 +37,6 @@ const setIntervalRange = (state, { intervalRange }) => ({
 
 const start = state => ({
   ...state,
-  phase: 'TEST',
   ready: false,
   answer: null,
   interval: randomInterval(state.intervalRange)
@@ -47,15 +45,14 @@ const start = state => ({
 const answer = (state, { answer }) => ({
   ...state,
   answer,
-  history: append({ interval: state.interval, answer: answer }, state.history)
+  historic: append({ interval: state.interval, answer: answer }, state.historic)
 })
 
 const ready = state => ({ ...state, ready: true })
 
 const stop = state => ({
   ...INITIAL_STATE,
-  intervalRange: state.intervalRange,
-  phase: 'CONFIG'
+  intervalRange: state.intervalRange
 })
 
 /* ------------- Hookup Reducers To Types ------------- */
@@ -84,10 +81,10 @@ export const expandSelectedIntervals = state =>
   expandIntervalSets(state.intervals.intervalRange, false)
 
 export const progressStats = state => {
-  const { history } = state.intervals
+  const { historic } = state.intervals
   const answerOk = ({ interval, answer }) => answer === interval.name
   return {
-    total: history.length,
-    correct: filter(answerOk, history).length
+    total: historic.length,
+    correct: filter(answerOk, historic).length
   }
 }
