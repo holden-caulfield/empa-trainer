@@ -8,7 +8,8 @@ export default [
     component: Intervals,
     props: {
       title: 'Intervalos',
-      infoSection: IntervalsInfo
+      infoSection: IntervalsInfo,
+      infoIcon: 'line-chart'
     }
   },
   {

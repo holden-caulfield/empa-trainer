@@ -10,6 +10,9 @@ const ProgressContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 90%;
+  margin: auto;
+  text-align: center;
 `
 
 const StatsLabel = styled.div`font-size: 50px;`
@@ -34,7 +37,14 @@ class IntervalsProgress extends Component {
           {correct}/{total}
         </StatsLabel>
       </ProgressContainer>
-    ) : null
+    ) : (
+      <ProgressContainer>
+        <p>
+          En esta sección vas a poder ver el análisis de tu progreso cuando
+          arranques tu entrenamiento
+        </p>
+      </ProgressContainer>
+    )
   }
 }
 

@@ -50,12 +50,12 @@ const RightIcon = MenuIcon.extend`
 
 export default class NavBar extends Component {
   render() {
-    const { onLeftIcon, onRightIcon, title } = this.props
+    const { onLeftIcon, onRightIcon, rightIcon, title } = this.props
     return (
       <NavBarContainer>
         <LeftIcon className="left" name="bars" onClick={onLeftIcon} />
         <TitleContainer>{title}</TitleContainer>
-        <RightIcon name="line-chart" onClick={onRightIcon} />
+        <RightIcon name={rightIcon} onClick={onRightIcon} />
       </NavBarContainer>
     )
   }

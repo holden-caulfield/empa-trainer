@@ -7,7 +7,8 @@ import { withRouter } from 'react-router-dom'
 
 class MainLayout extends Component {
   static defaultProps = {
-    infoSection: () => null
+    infoSection: () => null,
+    infoIcon: null
   }
   render = () => (
     <div id="mainContainer" role="main">
@@ -22,7 +23,8 @@ class MainLayout extends Component {
         <NavBar
           title={this.props.title}
           onLeftIcon={this.props.openLeft}
-          onRightIcon={this.props.openRight}
+          rightIcon={this.props.infoIcon}
+          onRightIcon={this.props.infoIcon ? this.props.openRight : false}
         />
         <section id="container">{<this.props.mainContent />}</section>
       </main>
@@ -31,7 +33,7 @@ class MainLayout extends Component {
         onClick={this.props.clear}
         className={this.props.right}
       >
-        {<this.props.infoSection />}
+        <this.props.infoSection />
       </aside>
     </div>
   )
