@@ -41,6 +41,11 @@ export const expandIntervalSets = (sets, ascDes = true) =>
 
 export const intervalOptions = Object.keys(intervalSets)
 
+export const setOf = interval =>
+  intervalOptions.find(name =>
+    intervalSets[name].includes(fromProps({ ...props(interval), dir: 1 }))
+  )
+
 export const randomInterval = intervalSets =>
   intervalFrom(randomNote(), randomPick(expandIntervalSets(intervalSets)))
 

@@ -72,4 +72,11 @@ describe('progressStats selector', () => {
     const { correct } = progressStats(sampleStateWithHistory)
     expect(correct).toBe(3)
   })
+
+  it('adds stats grouped by interval set', () => {
+    const { byGroup } = progressStats(sampleStateWithHistory)
+    expect(Object.keys(byGroup)).toHaveLength(4)
+    expect(byGroup['3ra'].total).toBe(2)
+    expect(byGroup['3ra'].correct).toBe(1)
+  })
 })

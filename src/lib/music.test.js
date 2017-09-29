@@ -52,3 +52,12 @@ describe('toItalian', () => {
     expect(M.toItalian('G#3')).toBe('Sol#')
   })
 })
+
+describe('setOf', () => {
+  it('gets the proper set for an interval', () => {
+    expect(M.setOf('3M')).toBe('3ra')
+    expect(M.setOf('-3m')).toBe('3ra')
+    expect(M.setOf('4A')).toBe('4/5')
+    expect(M.setOf('-8P')).toBe('8va')
+  })
+})

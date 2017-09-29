@@ -1,7 +1,12 @@
 import { createReducer, createActions } from 'reduxsauce'
-import { randomInterval, intervalOptions, expandIntervalSets } from 'lib/music'
+import {
+  randomInterval,
+  intervalOptions,
+  expandIntervalSets,
+  setOf
+} from 'lib/music'
 import { playInterval } from 'lib/player'
-import { append, filter } from 'ramda'
+import { append, filter, groupBy, map } from 'ramda'
 import 'rxjs/add/operator/do'
 import 'rxjs/add/operator/mapTo'
 
@@ -83,8 +88,13 @@ export const expandSelectedIntervals = state =>
 export const progressStats = state => {
   const { historic } = state.intervals
   const answerOk = ({ interval, answer }) => answer === interval.name
+  const intervalSet = ({ interval }) => setOf(interval.name)
+  const stats = intervals => ({
+    total: intervals.length,
+    correct: filter(answerOk, intervals).length
+  })
   return {
-    total: historic.length,
-    correct: filter(answerOk, historic).length
+    ...stats(historic),
+    byGroup: map(stats, groupBy(intervalSet, historic))
   }
 }
