@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { PickerButton } from 'Components/Button'
 import styled from 'styled-components'
 import Icon from 'react-fontawesome'
-import { props, fromProps } from 'tonal-interval'
+import { props, build } from 'tonal-interval'
 import { pick, none, isNil, values } from 'ramda'
 import { interval as ivl } from 'lib/music'
 
@@ -59,7 +59,7 @@ export default class IntervalPicker extends Component {
   componentDidUpdate() {
     const { answer, onIntervalSelected } = this.props
     if (this.stateComplete() && !answer) {
-      onIntervalSelected(fromProps(this.state))
+      onIntervalSelected(build(this.state))
     }
   }
 
