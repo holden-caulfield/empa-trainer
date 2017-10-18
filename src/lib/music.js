@@ -1,13 +1,13 @@
 import { chromatic } from 'tonal-range'
 import { shuffle } from 'tonal-array'
 import { pc } from 'tonal-note'
-import { transpose } from 'tonal-transpose'
+import { transpose } from 'tonal-distance'
 import { head, tail, chain } from 'ramda'
-import { props, fromProps } from 'tonal-interval'
+import { props, build } from 'tonal-interval'
 
 const randomPick = list => shuffle(list)[0]
 
-export const randomNote = (range = 'C4 B5') => randomPick(chromatic(range))
+export const randomNote = (range = ['C4', 'B5']) => randomPick(chromatic(range))
 
 const intervalSets = {
   '2da': ['2m', '2M'],
@@ -21,7 +21,7 @@ const intervalSets = {
 const lift = interval =>
   typeof interval === 'string' ? props(interval) : interval
 
-const quality = interval => fromProps({ ...lift(interval), dir: 1 })
+const quality = interval => build({ ...lift(interval), dir: 1 })
 
 const direction = interval => lift(interval).dir
 
@@ -43,11 +43,14 @@ export const intervalOptions = Object.keys(intervalSets)
 
 export const setOf = interval =>
   intervalOptions.find(name =>
-    intervalSets[name].includes(fromProps({ ...props(interval), dir: 1 }))
+    intervalSets[name].includes(build({ ...props(interval), dir: 1 }))
   )
 
-export const randomInterval = intervalSets =>
-  intervalFrom(randomNote(), randomPick(expandIntervalSets(intervalSets)))
+export const randomInterval = (intervalSets, rootNote = false) =>
+  intervalFrom(
+    rootNote ? rootNote : randomNote(),
+    randomPick(expandIntervalSets(intervalSets))
+  )
 
 export const intervalFrom = (note, name) => ({
   noteFrom: note,
@@ -64,24 +67,8 @@ const notesMap = {
   F: 'Fa',
   G: 'Sol'
 }
+
 export const toItalian = note => {
   const pitch = pc(note)
   return `${notesMap[head(pitch)]}${tail(pitch)}`
-}
-
-export const altToAccidental = alt => {
-  switch (alt) {
-    case -2:
-      return 'bb'
-    case -1:
-      return 'b'
-    case 0:
-      return 'n'
-    case 1:
-      return '#'
-    case 2:
-      return '##'
-    default:
-      return null
-  }
 }

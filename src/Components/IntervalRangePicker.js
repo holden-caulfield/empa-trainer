@@ -11,8 +11,6 @@ const ButtonPanel = styled.div`
   justify-content: space-between;
 `
 
-const FieldContainer = styled.div`width: 90%;`
-
 export default class IntervalPicker extends Component {
   render() {
     const { selected, onSelectRange } = this.props
@@ -26,21 +24,18 @@ export default class IntervalPicker extends Component {
     }
 
     return (
-      <FieldContainer>
-        <h2>Incluir intervalos de:</h2>
-        <ButtonPanel>
-          {intervalOptions.map(intervalSet => (
-            <PickerButton
-              color="black"
-              key={intervalSet}
-              onClick={clickHandler(intervalSet)}
-              selected={isSelected(intervalSet)}
-            >
-              {intervalSet}
-            </PickerButton>
-          ))}
-        </ButtonPanel>
-      </FieldContainer>
+      <ButtonPanel>
+        {intervalOptions.map(intervalSet => (
+          <PickerButton
+            color="black"
+            key={intervalSet}
+            onClick={clickHandler(intervalSet)}
+            selected={isSelected(intervalSet)}
+          >
+            {intervalSet}
+          </PickerButton>
+        ))}
+      </ButtonPanel>
     )
   }
 }

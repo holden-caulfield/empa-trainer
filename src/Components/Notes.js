@@ -1,17 +1,18 @@
 import React, { Component } from 'react'
-import { altToAccidental, toItalian } from 'lib/music'
+import { toItalian } from 'lib/music'
 import { Flow as VF } from 'vexflow'
-import { pc, oct, alt } from 'tonal-note'
+import { props } from 'tonal-note'
 
 const staveNoteFor = note => {
+  const { pc, oct, acc } = props(note)
   const StaveNote = new VF.StaveNote({
     clef: 'treble',
-    keys: [`${pc(note)}/${oct(note)}`],
+    keys: [`${pc}/${oct}`],
     duration: 'w'
   }).addModifier(0, new VF.Annotation(toItalian(note)))
 
-  if (alt(note) !== 0) {
-    StaveNote.addAccidental(0, new VF.Accidental(altToAccidental(alt(note))))
+  if (acc !== '') {
+    StaveNote.addAccidental(0, new VF.Accidental(acc))
   }
   return StaveNote
 }

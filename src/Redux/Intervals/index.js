@@ -14,6 +14,8 @@ import 'rxjs/add/operator/mapTo'
 
 const INITIAL_STATE = {
   intervalRange: intervalOptions,
+  rootNote: 'C4',
+  randomRootNote: true,
   interval: null,
   answer: null,
   ready: false,
@@ -24,6 +26,8 @@ const INITIAL_STATE = {
 
 const { Types, Creators } = createActions({
   setIntervalRange: ['intervalRange'],
+  setRootNote: ['rootNote'],
+  setRandomRootNote: ['randomRootNote'],
   start: null,
   ready: null,
   replay: null,
@@ -44,7 +48,9 @@ const start = state => ({
   ...state,
   ready: false,
   answer: null,
-  interval: randomInterval(state.intervalRange)
+  interval: state.randomRootNote
+    ? randomInterval(state.intervalRange)
+    : randomInterval(state.intervalRange, state.rootNote)
 })
 
 const answer = (state, { answer }) => ({
@@ -60,6 +66,16 @@ const stop = state => ({
   intervalRange: state.intervalRange
 })
 
+const setRootNote = (state, { rootNote }) => ({
+  ...state,
+  rootNote
+})
+
+const setRandomRootNote = (state, { randomRootNote }) => ({
+  ...state,
+  randomRootNote
+})
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
@@ -67,7 +83,9 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.START]: start,
   [Types.ANSWER]: answer,
   [Types.READY]: ready,
-  [Types.STOP]: stop
+  [Types.STOP]: stop,
+  [Types.SET_ROOT_NOTE]: setRootNote,
+  [Types.SET_RANDOM_ROOT_NOTE]: setRandomRootNote
 })
 
 /* ------------- Epics ------------- */
