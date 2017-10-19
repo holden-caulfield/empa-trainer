@@ -43,7 +43,6 @@ export default class NotePicker extends Component {
   render = () => {
     const { disabled, value } = this.props
     const { alt, step } = noteProps(value)
-    console.log(this.props.value)
     return (
       <div>
         <NotesSelect
