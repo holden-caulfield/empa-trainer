@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import { props as noteProps, build } from 'tonal-note'
-import { pick } from 'ramda'
 
 const notes = ['Do', 'Re', 'Mi', 'Fa', 'Sol', 'La', 'Si']
 
@@ -32,45 +31,25 @@ const CheckableOption = styled.button`
 
 export default class NotePicker extends Component {
   static defaultProps = {
-    value: 'C',
+    value: 'C4',
     disabled: false,
     onChange: () => {}
   }
 
-  initStateFrom(props) {
-    this.state = pick(['step', 'alt', 'oct'], noteProps(props.value))
-  }
-
-  publishChange = () => {
-    this.props.onChange(build(this.state))
-  }
-
-  changeStep = e => {
-    this.setState({ step: parseInt(e.target.value, 10) }, this.publishChange)
-  }
-
-  changeAlt = alt => () => {
-    this.setState({ alt: this.state.alt === alt ? 0 : alt }, this.publishChange)
-  }
-
-  constructor(props) {
-    super(props)
-    this.initStateFrom(props)
-  }
-
-  componentWillReceiveProps(props) {
-    this.initStateFrom(props)
+  changeNote = change => {
+    this.props.onChange(build({ ...noteProps(this.props.value), ...change }))
   }
 
   render = () => {
-    const { alt, step } = this.state
-    const { disabled } = this.props
+    const { disabled, value } = this.props
+    const { alt, step } = noteProps(value)
+    console.log(this.props.value)
     return (
       <div>
         <NotesSelect
           disabled={disabled}
           value={step}
-          onChange={this.changeStep}
+          onChange={e => this.changeNote({ step: e.target.value })}
         >
           {notes.map((note, index) => (
             <option value={index} key={note}>
@@ -80,14 +59,14 @@ export default class NotePicker extends Component {
         </NotesSelect>
         <CheckableOption
           disabled={disabled}
-          onClick={this.changeAlt(1)}
+          onClick={() => this.changeNote({ alt: alt === 1 ? 0 : 1 })}
           selected={alt === 1}
         >
           &#9839;
         </CheckableOption>
         <CheckableOption
           disabled={disabled}
-          onClick={this.changeAlt(-1)}
+          onClick={() => this.changeNote({ alt: alt === -1 ? 0 : -1 })}
           selected={alt === -1}
         >
           &#9837;
