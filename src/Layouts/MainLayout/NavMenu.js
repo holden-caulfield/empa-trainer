@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 import Pages from 'Pages'
+import { imagePath } from 'lib/images'
 
 const NavContainer = styled.nav`
   display: flex;
@@ -39,7 +40,7 @@ export default class Menu extends Component {
   render = () => (
     <NavContainer>
       <NavHeader>
-        <Logo src="/images/logo.svg" />
+        <Logo src={imagePath('logo.svg')} alt="" />
       </NavHeader>
       {Pages.map(page => (
         <NavItem key={page.name} to={page.route} activeClassName="selected">

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import Icon from 'react-fontawesome'
+import { imagePath } from 'lib/images'
 
 const NavBarContainer = styled.header`
   display: flex;
@@ -63,7 +64,7 @@ export default class NavBar extends Component {
       <NavBarContainer>
         <LeftIcon className="left" name="bars" onClick={onLeftIcon} />
         <TitleContainer>
-          <img src="/images/iso.svg" alt="" />
+          <img src={imagePath('iso.svg')} alt="" />
           <h1>{title}</h1>
         </TitleContainer>
         <RightIcon name={rightIcon} onClick={onRightIcon} />

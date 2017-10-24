@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import Notes from 'Components/Notes'
 import Button from 'Components/Button'
 import Icon from 'react-fontawesome'
+import { imagePath } from 'lib/images'
 
 const IntervalContainer = styled.div`
   display: flex;
@@ -14,7 +15,7 @@ const IntervalContainer = styled.div`
   padding-left: 40px;
   margin: 0;
   background-color: #f0f3f4;
-  background-image: url('/images/ondas.svg');
+  background-image: url(${imagePath('ondas.svg')});
   background-repeat: repeat-x;
   background-position: center 177px;
 `

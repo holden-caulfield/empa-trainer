@@ -5,10 +5,11 @@ import NavMenu from './NavMenu'
 import NavBar from './NavBar'
 import { withRouter } from 'react-router-dom'
 import styled from 'styled-components'
+import { imagePath } from 'lib/images'
 
 const Filler = styled.div`
   flex-grow: 1;
-  background-image: url('/images/ondas-dark.svg');
+  background-image: url(${imagePath('ondas-dark.svg')});
   background-repeat: repeat-x;
   background-position: center bottom;
   opacity: 0.1;
