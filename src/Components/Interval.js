@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import Notes from 'Components/Notes'
 import Button from 'Components/Button'
 import Icon from 'react-fontawesome'
-import { soft } from 'lib/colors'
 
 const IntervalContainer = styled.div`
   display: flex;
