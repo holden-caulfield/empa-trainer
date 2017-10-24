@@ -3,13 +3,15 @@ import { connect } from 'react-redux'
 import styled from 'styled-components'
 
 import IntervalsActions from 'Redux/Intervals'
-import Button from 'Components/Button'
+import Button, { ButtonBar, CheckableButton } from 'Components/Button'
 import MainPanel from 'Components/Panels'
 import NotePicker from 'Components/NotePicker'
 import IntervalRangePicker from 'Components/IntervalRangePicker'
 
 const SectionContainer = styled.div`
-  width: 90%;
+  width: calc(100% - 40px);
+  padding: 0 20px;
+  margin-bottom: 10px;
   h2 {
     font-size: 20px;
   }
@@ -17,10 +19,18 @@ const SectionContainer = styled.div`
 const SectionControls = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: center;
 `
-const SectionButton = Button.extend`
+const SectionButton = CheckableButton.extend`
   margin: 0 20px;
-  width: auto;
+  max-width: 160px;
+  height: 50px;
+  font-weight: ${props => (props.selected ? 600 : 300)};
+  @media (max-width: 720px) {
+    font-size: 15px;
+    max-width: 130px;
+    height: 40px;
+  }
 `
 
 const ConfigSection = props => (
@@ -65,14 +75,16 @@ class IntervalsConfig extends Component {
             value={rootNote}
           />
           <SectionButton
-            color="black"
+            color="dark"
             selected={randomRootNote}
             onClick={() => setRandomRootNote(!randomRootNote)}
           >
             Aleatorio
           </SectionButton>
         </ConfigSection>
-        <Button onClick={this.startTest}>Empezar</Button>
+        <ButtonBar>
+          <Button onClick={this.startTest}>Empezar</Button>
+        </ButtonBar>
       </MainPanel>
     )
   }

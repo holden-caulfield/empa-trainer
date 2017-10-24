@@ -11,18 +11,13 @@ const IntervalPickerContainer = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-content: space-between;
-  width: 80%;
-  @media (max-width: 500px) {
-    width: 100%;
-  }
+  width: 100%;
 `
 
 const IntervalsContainer = styled.div`
   display: flex;
   flex-flow: row wrap;
   flex-grow: 3;
-  align-items: center;
-  justify-content: center;
 `
 
 const DirectionContainer = styled.div`
@@ -30,6 +25,20 @@ const DirectionContainer = styled.div`
   flex-grow: 1;
   flex-direction: column;
   justify-content: center;
+`
+
+const IntervalPickerButton = PickerButton.extend`
+  height: 60px;
+  font-weight: 600;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  font-size: 20px;
+  @media (max-width: 400px) {
+    width: 60px;
+  }
+  @media (max-width: 320px) {
+    width: 50px;
+    height: 50px;
+  }
 `
 
 const directions = [
@@ -65,10 +74,10 @@ export default class IntervalPicker extends Component {
 
   colorFor = fn => value => {
     const { interval, answer } = this.props
-    if (!answer) return 'black'
-    if (fn(interval.name) === value) return 'green'
-    if (fn(answer) === value) return 'crimson'
-    return 'black'
+    if (!answer) return 'dark'
+    if (fn(interval.name) === value) return 'right'
+    if (fn(answer) === value) return 'wrong'
+    return 'dark'
   }
 
   render() {
@@ -78,7 +87,7 @@ export default class IntervalPicker extends Component {
       <IntervalPickerContainer>
         <IntervalsContainer>
           {possibleIntervals.map(quality => (
-            <PickerButton
+            <IntervalPickerButton
               color={this.colorFor(ivl.quality)(quality)}
               key={quality}
               onClick={() => this.setQuality(quality)}
@@ -86,12 +95,12 @@ export default class IntervalPicker extends Component {
               disabled={answer}
             >
               {quality}
-            </PickerButton>
+            </IntervalPickerButton>
           ))}
         </IntervalsContainer>
         <DirectionContainer>
           {directions.map(direction => (
-            <PickerButton
+            <IntervalPickerButton
               key={direction.name}
               color={this.colorFor(ivl.direction)(direction.dir)}
               selected={this.state.dir === direction.dir}
@@ -99,7 +108,7 @@ export default class IntervalPicker extends Component {
               disabled={answer}
             >
               <Icon name={direction.icon} />
-            </PickerButton>
+            </IntervalPickerButton>
           ))}
         </DirectionContainer>
       </IntervalPickerContainer>

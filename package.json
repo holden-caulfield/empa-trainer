@@ -17,7 +17,7 @@
     "reduxsauce": "^0.6.0",
     "rxjs": "^5.4.3",
     "soundfont-player": "^0.10.6",
-    "styled-components": "^2.1.2",
+    "styled-components": "^2.2.1",
     "tonal": "^1.0.0",
     "tonal-range": "^1.0.0",
     "vexflow": "^1.2.84"
@@ -25,7 +25,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom --setupTestFrameworkScriptFile=./testBootstrap.js",
+    "test":
+      "react-scripts test --env=jsdom --setupTestFrameworkScriptFile=./testBootstrap.js",
     "eject": "react-scripts eject",
     "prettier": "prettier --write \"src/**/*.{js,jsx}\"",
     "precommit": "lint-staged",
@@ -42,10 +43,7 @@
     "web-audio-test-api": "^0.5.2"
   },
   "lint-staged": {
-    "src/**/*.{js,jsx,json,css}": [
-      "prettier --write",
-      "git add"
-    ]
+    "src/**/*.{js,jsx,json,css}": ["prettier --write", "git add"]
   },
   "prettier": {
     "singleQuote": true,

@@ -3,9 +3,22 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import IntervalsActions, { expandSelectedIntervals } from 'Redux/Intervals'
 import MainPanel from 'Components/Panels'
-import Button from 'Components/Button'
+import Button, { SecondaryButton, ButtonBar } from 'Components/Button'
 import IntervalPicker from 'Components/IntervalPicker'
 import Interval from 'Components/Interval'
+import styled from 'styled-components'
+
+const ControlsContainer = styled.div`
+  width: calc(100% - 40px);
+  padding: 0 20px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  @media (max-width: 400px) {
+    width: calc(100% - 20px);
+    padding: 0 10px;
+  }
+`
 
 class IntervalsTest extends Component {
   stop = () => {
@@ -28,16 +41,18 @@ class IntervalsTest extends Component {
           }
           replay={replay}
         />
-        <IntervalPicker
-          possibleIntervals={possibleIntervals}
-          onIntervalSelected={sendAnswer}
-          interval={interval}
-          answer={answer}
-        />
-        <Button onClick={nextInterval}>Siguiente</Button>
-        <Button color="crimson" onClick={this.stop}>
-          Terminar
-        </Button>
+        <ControlsContainer>
+          <IntervalPicker
+            possibleIntervals={possibleIntervals}
+            onIntervalSelected={sendAnswer}
+            interval={interval}
+            answer={answer}
+          />
+          <ButtonBar>
+            <SecondaryButton onClick={this.stop}>Terminar</SecondaryButton>
+            <Button onClick={nextInterval}>Siguiente</Button>
+          </ButtonBar>
+        </ControlsContainer>
       </MainPanel>
     ) : (
       <Redirect to="/intervals" />

@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: 'Work Sans';
   overflow: hidden;
 }
 
@@ -12,7 +12,6 @@ body {
 
 #mainPanel {
   flex-grow: 1;
-  height: 100vh;
   display: flex;
   flex-direction: column;
 }
@@ -20,6 +19,8 @@ body {
 #leftPanel {
   background-color: white;
   border-right: 1px solid black;
+  display: flex;
+  flex-direction: column;
 }
 
 #rightPanel {

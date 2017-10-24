@@ -27,7 +27,7 @@ export default class IntervalPicker extends Component {
       <ButtonPanel>
         {intervalOptions.map(intervalSet => (
           <PickerButton
-            color="black"
+            color="dark"
             key={intervalSet}
             onClick={clickHandler(intervalSet)}
             selected={isSelected(intervalSet)}

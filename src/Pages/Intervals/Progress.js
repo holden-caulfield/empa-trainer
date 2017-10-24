@@ -4,6 +4,7 @@ import { progressStats } from 'Redux/Intervals'
 import styled from 'styled-components'
 import chroma from 'chroma-js'
 import { intervalOptions } from 'lib/music'
+import T from 'Theme'
 
 const ProgressContainer = styled.div`
   min-height: 100%;
@@ -38,7 +39,11 @@ const StatsLabel = styled.p`
 `
 
 const PercentLabel = ({ value }) => {
-  const colorScale = chroma.scale(['crimson', 'gold', 'green'])
+  const colorScale = chroma.scale([
+    T.colors.wrong,
+    T.colors.average,
+    T.colors.right
+  ])
   const StyledLabel = styled.div`
     font-size: 100px;
     color: ${colorScale(value)};
@@ -55,7 +60,7 @@ class IntervalsProgress extends Component {
     )
     return total > 0 ? (
       <ProgressContainer>
-        <OverallProgressSection color="palevioletred">
+        <OverallProgressSection>
           <h2>Resultados generales</h2>
           <PercentLabel value={percentage} />
           <StatsLabel>

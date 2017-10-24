@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import Pages from 'Pages'
-
 import {
   BrowserRouter as Router,
   Switch,

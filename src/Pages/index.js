@@ -9,7 +9,7 @@ export default [
     props: {
       title: 'Intervalos',
       infoSection: IntervalsInfo,
-      infoIcon: 'line-chart'
+      infoIcon: 'area-chart'
     }
   },
   {

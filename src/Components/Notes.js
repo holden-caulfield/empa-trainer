@@ -39,11 +39,12 @@ export default class Notes extends Component {
       VF.Renderer.Backends.SVG
     )
 
+    this.renderer.resize(200, 200)
+
     // Configure the rendering context.
     const context = this.renderer.getContext()
     context.setFont('Arial', 10, '').setBackgroundFillStyle('#eed')
 
-    this.renderer.resize(200, 200)
     this.stave = new VF.Stave(10, 44, 180)
 
     // Add a clef and time signature.

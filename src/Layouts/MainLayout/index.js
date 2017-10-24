@@ -4,6 +4,16 @@ import PanelsActions from 'Redux/Panels'
 import NavMenu from './NavMenu'
 import NavBar from './NavBar'
 import { withRouter } from 'react-router-dom'
+import styled from 'styled-components'
+
+const Filler = styled.div`
+  flex-grow: 1;
+  background-image: url('/images/ondas-dark.svg');
+  background-repeat: repeat-x;
+  background-position: center bottom;
+  opacity: 0.1;
+  margin-bottom: 20px;
+`
 
 class MainLayout extends Component {
   static defaultProps = {
@@ -18,6 +28,7 @@ class MainLayout extends Component {
         className={this.props.left}
       >
         <NavMenu />
+        <Filler />
       </aside>
       <main id="mainPanel">
         <NavBar

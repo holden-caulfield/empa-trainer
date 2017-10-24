@@ -10,30 +10,37 @@ const NavContainer = styled.nav`
 
 const NavHeader = styled.header`
   height: 60px;
-  line-height: 60px;
   font-size: 24px;
   padding-left: 10px;
   border-bottom: 1px solid black;
+`
+
+const Logo = styled.img`
+  height: 26px;
+  padding: 17px 5px;
 `
 
 const NavItem = styled(NavLink)`
   height: 40px;
   line-height: 40px;
   text-decoration: none;
-  color: black;
+  color: ${props => props.theme.colors.dark};
   font-size: 16px;
+  font-weight: 600;
   padding-left: 10px;
-  border-bottom: 1px solid grey;
+  box-shadow: inset 0 -1px 0 0 #eceff1;
   &.selected {
     color: white;
-    background-color: black;
+    background-color: ${props => props.theme.colors.accent};
   }
 `
 
 export default class Menu extends Component {
   render = () => (
     <NavContainer>
-      <NavHeader>EMPA Trainer</NavHeader>
+      <NavHeader>
+        <Logo src="/images/logo.svg" />
+      </NavHeader>
       {Pages.map(page => (
         <NavItem key={page.name} to={page.route} activeClassName="selected">
           {page.props.title}

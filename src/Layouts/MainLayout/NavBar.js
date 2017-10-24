@@ -25,7 +25,15 @@ const TitleContainer = styled.h1`
   flex-grow: 1;
   font-size: 20px;
   font-weight: bold;
-  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  h1 {
+    font-size: 25px;
+    padding: 0 10px;
+  }
 `
 
 const MenuIcon = styled(Icon)`
@@ -54,7 +62,10 @@ export default class NavBar extends Component {
     return (
       <NavBarContainer>
         <LeftIcon className="left" name="bars" onClick={onLeftIcon} />
-        <TitleContainer>{title}</TitleContainer>
+        <TitleContainer>
+          <img src="/images/iso.svg" />
+          <h1>{title}</h1>
+        </TitleContainer>
         <RightIcon name={rightIcon} onClick={onRightIcon} />
       </NavBarContainer>
     )

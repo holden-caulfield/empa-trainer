@@ -1,25 +1,17 @@
-import styled from 'styled-components'
-import chroma from 'chroma-js'
-
-const makeBackground = ({ selected, color }) =>
-  selected ? color : chroma(color).luminance(0.7)
-
-const mainColor = ({ selected, color }) => (selected ? 'white' : color)
+import styled, { css } from 'styled-components'
+import { soft, themeColor, themeColorIfProp } from 'lib/colors'
+import React from 'react'
 
 const makeBox = ({ color }) => `0px 0px 5px ${color}`
 
-const Button = styled.button.attrs({
-  color: props => props.color || 'green'
+const BaseButton = styled.button.attrs({
+  color: themeColor('color', 'accent'),
+  textColor: themeColor('textColor', 'light')
 })`
-  border: 1px solid;
-  border-radius: 5px;
-  padding: 15px;
-  width: 90%;
-  font-size: 18px;
-  background-color: ${makeBackground};
-  border-color: ${props => props.color};
-  color: ${mainColor};
-  align-self: center;
+  border: 0;
+  font-family: 'Work Sans';
+  background-color: ${props => props.color};
+  color: ${props => props.textColor};
   &:hover {
     box-shadow: ${makeBox};
   }
@@ -31,11 +23,61 @@ const Button = styled.button.attrs({
   }
 `
 
-export const PickerButton = Button.extend`
-  width: 70px;
-  height: 70px;
-  font-size: 15px;
-  margin: 10px 10px 0 0;
+const Button = BaseButton.extend`
+  border-radius: 100px;
+  height: 60px;
+  width: auto;
+  flex-grow: 1;
+  max-width: 300px;
+  font-size: 20px;
+  font-weight: 600;
+  @media (max-width: 720px) {
+    height: 40px;
+    font-size: 16px;
+  }
+`
+export default Button
+
+const LightButton = Button.extend`
+  font-weight: 300;
+  border: ${props => '1px solid ' + props.textColor};
 `
 
-export default Button
+export const SecondaryButton = props => (
+  <LightButton color="light" textColor="fade" {...props} />
+)
+
+const withCheckable = css`
+  background-color: ${({ selected, color }) =>
+    selected ? color : soft(color)};
+  color: ${themeColorIfProp('selected', 'light', 'disabled')};
+`
+
+export const CheckableButton = Button.extend`${withCheckable};`
+
+export const PickerButton = BaseButton.extend`
+  ${withCheckable};
+  width: 80px;
+  height: 80px;
+  border-radius: 15px;
+  font-size: 24px;
+  margin: 10px 10px 0 0;
+  font-weight: 300;
+`
+export const ButtonBar = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+  align-items: flex-end;
+  flex-grow: 1;
+  button {
+    margin: 0 10px;
+  }
+  button:first-child {
+    margin-left: 0;
+  }
+  button:last-child {
+    margin-right: 0;
+  }
+`

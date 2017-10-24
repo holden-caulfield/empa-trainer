@@ -10,6 +10,11 @@ const NotesSelect = styled.select`
   text-indent: 5px;
   height: 50px;
   margin-right: 10px;
+  @media (max-width: 720px) {
+    font-size: 20px;
+    width: 70px;
+    height: 40px;
+  }
 `
 
 const CheckableOption = styled.button`
@@ -20,6 +25,11 @@ const CheckableOption = styled.button`
   width: 30px;
   height: 50px;
   color: ${({ selected }) => (selected ? 'black' : 'lightgrey')};
+  @media (max-width: 720px) {
+    font-size: 25px;
+    width: 25px;
+    height: 40px;
+  }
   :hover {
     text-shadow: 1px 1px 5px black;
   }

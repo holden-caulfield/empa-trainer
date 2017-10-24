@@ -8,12 +8,17 @@ import App from './App'
 import './index.css'
 import 'Config/Reactotron'
 
+import theme from 'Theme'
+import { ThemeProvider } from 'styled-components'
+
 const store = createStore()
 
 ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
+  <ThemeProvider theme={theme}>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </ThemeProvider>,
   document.getElementById('root')
 )
 
