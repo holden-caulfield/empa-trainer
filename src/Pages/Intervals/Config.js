@@ -52,32 +52,25 @@ class IntervalsConfig extends Component {
   }
 
   render = () => {
-    const {
-      intervalRange,
-      rootNote,
-      randomRootNote,
-      setIntervalRange,
-      setRootNote,
-      setRandomRootNote
-    } = this.props
+    const { intervalRange, rootNote, randomRootNote, setConfig } = this.props
     return (
       <MainPanel>
         <ConfigSection title="Incluir intervalos de:">
           <IntervalRangePicker
             selected={intervalRange}
-            onSelectRange={setIntervalRange}
+            onSelectRange={intervalRange => setConfig({ intervalRange })}
           />
         </ConfigSection>
         <ConfigSection title="Intervalos a partir de:">
           <NotePicker
             disabled={randomRootNote}
-            onChange={setRootNote}
+            onChange={rootNote => setConfig({ rootNote })}
             value={rootNote}
           />
           <SectionButton
             color="dark"
             selected={randomRootNote}
-            onClick={() => setRandomRootNote(!randomRootNote)}
+            onClick={() => setConfig({ randomRootNote: !randomRootNote })}
           >
             Aleatorio
           </SectionButton>
@@ -90,11 +83,7 @@ class IntervalsConfig extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  intervalRange: state.intervals.intervalRange,
-  rootNote: state.intervals.rootNote,
-  randomRootNote: state.intervals.randomRootNote
-})
+const mapStateToProps = state => state.intervals.config
 
 const mapDispatchToProps = IntervalsActions
 

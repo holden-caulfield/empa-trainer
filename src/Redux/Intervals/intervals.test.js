@@ -4,7 +4,7 @@ import { intervalFrom as ivl } from 'lib/music'
 describe('reducer', () => {
   it('adds a random interval when exercise starts', () => {
     const { interval } = reducer(
-      { intervalRange: ['2da', '6ta'] },
+      { config: { intervalRange: ['2da', '6ta'] } },
       Actions.start()
     )
     expect(interval).not.toBeNull()
@@ -28,19 +28,23 @@ describe('reducer', () => {
 
   it('properly resets state when stopped', () => {
     const state = {
-      intervalRange: ['3ra'],
+      config: {
+        intervalRange: ['3ra']
+      },
       interval: ivl('G3', '5P'),
       answer: '3M'
     }
-    const { interval, intervalRange, answer } = reducer(state, Actions.stop())
+    const { interval, config, answer } = reducer(state, Actions.stop())
     expect(interval).toBeNull()
-    expect(intervalRange).toMatchObject(['3ra'])
+    expect(config.intervalRange).toMatchObject(['3ra'])
     expect(answer).toBeNull()
   })
 
   it('properly resets selection on each new interval', () => {
     const state = {
-      intervalRange: ['3ra'],
+      config: {
+        intervalRange: ['3ra']
+      },
       interval: ivl('G3', '5P'),
       answer: '3M'
     }

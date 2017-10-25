@@ -13,9 +13,11 @@ import 'rxjs/add/operator/mapTo'
 /* ------------- Initial State ------------- */
 
 const INITIAL_STATE = {
-  intervalRange: intervalOptions,
-  rootNote: 'C4',
-  randomRootNote: true,
+  config: {
+    intervalRange: intervalOptions,
+    rootNote: 'C4',
+    randomRootNote: true
+  },
   interval: null,
   answer: null,
   ready: false,
@@ -25,9 +27,7 @@ const INITIAL_STATE = {
 /* ------------- Types and Action Creators ------------- */
 
 const { Types, Creators } = createActions({
-  setIntervalRange: ['intervalRange'],
-  setRootNote: ['rootNote'],
-  setRandomRootNote: ['randomRootNote'],
+  setConfig: ['newConfig'],
   start: null,
   ready: null,
   replay: null,
@@ -38,19 +38,18 @@ const { Types, Creators } = createActions({
 export default Creators
 
 /* ------------- Reducers ------------- */
-
-const setIntervalRange = (state, { intervalRange }) => ({
+const setConfig = (state, { newConfig }) => ({
   ...state,
-  intervalRange
+  config: { ...state.config, ...newConfig }
 })
 
 const start = state => ({
   ...state,
   ready: false,
   answer: null,
-  interval: state.randomRootNote
-    ? randomInterval(state.intervalRange)
-    : randomInterval(state.intervalRange, state.rootNote)
+  interval: state.config.randomRootNote
+    ? randomInterval(state.config.intervalRange)
+    : randomInterval(state.config.intervalRange, state.config.rootNote)
 })
 
 const answer = (state, { answer }) => ({
@@ -63,29 +62,17 @@ const ready = state => ({ ...state, ready: true })
 
 const stop = state => ({
   ...INITIAL_STATE,
-  intervalRange: state.intervalRange
-})
-
-const setRootNote = (state, { rootNote }) => ({
-  ...state,
-  rootNote
-})
-
-const setRandomRootNote = (state, { randomRootNote }) => ({
-  ...state,
-  randomRootNote
+  config: state.config
 })
 
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
-  [Types.SET_INTERVAL_RANGE]: setIntervalRange,
   [Types.START]: start,
   [Types.ANSWER]: answer,
   [Types.READY]: ready,
   [Types.STOP]: stop,
-  [Types.SET_ROOT_NOTE]: setRootNote,
-  [Types.SET_RANDOM_ROOT_NOTE]: setRandomRootNote
+  [Types.SET_CONFIG]: setConfig
 })
 
 /* ------------- Epics ------------- */
@@ -101,7 +88,7 @@ export const epic = (action$, store) =>
 /* ------------- Selectors ------------- */
 
 export const expandSelectedIntervals = state =>
-  expandIntervalSets(state.intervals.intervalRange, false)
+  expandIntervalSets(state.intervals.config.intervalRange, false)
 
 export const progressStats = state => {
   const { historic } = state.intervals
