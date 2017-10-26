@@ -5,13 +5,12 @@ import React from 'react'
 const makeBox = ({ color }) => `0px 0px 5px ${color}`
 
 const BaseButton = styled.button.attrs({
-  color: themeColor('color', 'accent'),
-  textColor: themeColor('textColor', 'light')
+  color: themeColor('color', 'accent')
 })`
   border: 0;
   font-family: 'Work Sans';
   background-color: ${props => props.color};
-  color: ${props => props.textColor};
+  color: ${themeColor('textColor', 'light')};
   &:hover {
     box-shadow: ${makeBox};
   }
