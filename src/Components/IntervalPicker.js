@@ -62,7 +62,7 @@ export default class IntervalPicker extends Component {
   stateComplete = () => none(isNil, values(this.state))
 
   componentWillReceiveProps(props) {
-    if (!props.answer) this.setState(INITIAL_STATE)
+    if (this.props.answer && !props.answer) this.setState(INITIAL_STATE)
   }
 
   componentDidUpdate() {
@@ -82,7 +82,6 @@ export default class IntervalPicker extends Component {
 
   render() {
     const { possibleIntervals, answer } = this.props
-
     return (
       <IntervalPickerContainer>
         <IntervalsContainer>

@@ -16,7 +16,8 @@ const INITIAL_STATE = {
   config: {
     intervalRange: intervalOptions,
     rootNote: 'C4',
-    randomRootNote: true
+    randomRootNote: true,
+    drillLength: false
   },
   interval: null,
   answer: null,
@@ -37,20 +38,28 @@ const { Types, Creators } = createActions({
 
 export default Creators
 
+/* ------------- Helpers ------------- */
+const drillIsOver = ({ historic, config }) =>
+  config.drillLength && historic.length >= config.drillLength
+
 /* ------------- Reducers ------------- */
 const setConfig = (state, { newConfig }) => ({
   ...state,
   config: { ...state.config, ...newConfig }
 })
 
-const start = state => ({
-  ...state,
-  ready: false,
-  answer: null,
-  interval: state.config.randomRootNote
-    ? randomInterval(state.config.intervalRange)
-    : randomInterval(state.config.intervalRange, state.config.rootNote)
-})
+const start = state => {
+  if (drillIsOver(state)) return state
+  const { randomRootNote, intervalRange, rootNote } = state.config
+  return {
+    ...state,
+    ready: false,
+    answer: null,
+    interval: randomRootNote
+      ? randomInterval(intervalRange)
+      : randomInterval(intervalRange, rootNote)
+  }
+}
 
 const answer = (state, { answer }) => ({
   ...state,
@@ -81,11 +90,13 @@ export const epic = (action$, store) =>
   action$
     .ofType(Types.START, Types.REPLAY)
     .do(() => {
-      playInterval(store.getState().intervals.interval)
+      const currentState = store.getState().intervals
+      !drillIsOver(currentState) && playInterval(currentState.interval)
     })
     .mapTo(Creators.ready())
 
 /* ------------- Selectors ------------- */
+export const hasNext = state => !drillIsOver(state.intervals)
 
 export const expandSelectedIntervals = state =>
   expandIntervalSets(state.intervals.config.intervalRange, false)

@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-import IntervalsActions, { expandSelectedIntervals } from 'Redux/Intervals'
+import IntervalsActions, {
+  expandSelectedIntervals,
+  hasNext
+} from 'Redux/Intervals'
 import MainPanel from 'Components/Panels'
 import Button, { SecondaryButton, ButtonBar } from 'Components/Button'
 import IntervalPicker from 'Components/IntervalPicker'
@@ -31,6 +34,7 @@ class IntervalsTest extends Component {
       possibleIntervals,
       replay,
       nextInterval,
+      hasNext,
       sendAnswer
     } = this.props
     return interval ? (
@@ -50,7 +54,7 @@ class IntervalsTest extends Component {
           />
           <ButtonBar>
             <SecondaryButton onClick={this.stop}>Terminar</SecondaryButton>
-            <Button onClick={nextInterval}>Siguiente</Button>
+            {hasNext && <Button onClick={nextInterval}>Siguiente</Button>}
           </ButtonBar>
         </ControlsContainer>
       </MainPanel>
@@ -62,7 +66,8 @@ class IntervalsTest extends Component {
 
 const mapStateToProps = state => ({
   ...state.intervals,
-  possibleIntervals: expandSelectedIntervals(state)
+  possibleIntervals: expandSelectedIntervals(state),
+  hasNext: hasNext(state)
 })
 
 const mapDispatchToProps = {

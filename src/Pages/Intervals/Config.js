@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import IntervalsActions from 'Redux/Intervals'
 import Button, { ButtonBar, CheckableButton } from 'Components/Button'
 import MainPanel from 'Components/Panels'
+import Picker from 'Components/Picker'
 import NotePicker from 'Components/NotePicker'
 import IntervalRangePicker from 'Components/IntervalRangePicker'
 
@@ -52,13 +53,26 @@ class IntervalsConfig extends Component {
   }
 
   render = () => {
-    const { intervalRange, rootNote, randomRootNote, setConfig } = this.props
+    const {
+      intervalRange,
+      rootNote,
+      randomRootNote,
+      drillLength,
+      setConfig
+    } = this.props
     return (
       <MainPanel>
         <ConfigSection title="Incluir intervalos de:">
           <IntervalRangePicker
             selected={intervalRange}
             onSelectRange={intervalRange => setConfig({ intervalRange })}
+          />
+        </ConfigSection>
+        <ConfigSection title="Cantidad de intervalos:">
+          <Picker
+            value={drillLength}
+            options={{ '5': 5, '10': 10, '20': 20, '\u221E': false }}
+            onSelect={drillLength => setConfig({ drillLength })}
           />
         </ConfigSection>
         <ConfigSection title="Intervalos a partir de:">
