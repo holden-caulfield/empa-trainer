@@ -39,7 +39,9 @@ export default Button
 
 const LightButton = Button.extend`
   font-weight: 300;
-  border: ${props => '1px solid ' + props.textColor};
+  border-width: 1px;
+  border-style: solid;
+  border-color: ${themeColor('textColor', 'light')};
 `
 
 export const SecondaryButton = props => (
@@ -56,8 +58,8 @@ export const CheckableButton = Button.extend`${withCheckable};`
 
 export const PickerButton = BaseButton.extend`
   ${withCheckable};
-  width: 80px;
-  height: 80px;
+  width: 70px;
+  height: 70px;
   border-radius: 15px;
   font-size: 24px;
   margin: 10px 10px 0 0;
@@ -69,6 +71,7 @@ export const ButtonBar = styled.div`
   width: 100%;
   justify-content: center;
   align-items: flex-end;
+  margin-top: 20px;
   flex-grow: 1;
   button {
     margin: 0 10px;

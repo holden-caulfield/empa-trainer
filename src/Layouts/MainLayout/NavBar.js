@@ -13,12 +13,17 @@ const NavBarContainer = styled.header`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  background-color: ${props => props.theme.colors.light};
   border-bottom: 1px solid black;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
   @media (max-width: 720px) {
     right: 0;
+    border-right: 0;
   }
   @media (max-width: 1040px) {
     left: 0;
+    border-left: 0;
   }
 `
 
