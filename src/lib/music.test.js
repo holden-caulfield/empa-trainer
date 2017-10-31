@@ -23,7 +23,7 @@ describe('expandIntervalSets', () => {
 
 describe('randomInterval', () => {
   it('always picks an interval from the given sets', () => {
-    const result = M.randomInterval(['4/5', '8va'])
+    const result = M.randomInterval({ sets: ['4/5', '8va'] })
     const possibleIntervals = [
       '4P',
       '4A',
@@ -35,6 +35,19 @@ describe('randomInterval', () => {
       '-8P'
     ]
     expect(possibleIntervals).toContain(result.name)
+  })
+
+  it('allows fixing the root note', () => {
+    const result = M.randomInterval({ sets: ['4/5', '8va'], rootNote: 'D5' })
+    expect(result.noteFrom).toBe('D5')
+  })
+
+  it('allows filtering out some possible intervals', () => {
+    const result = M.randomInterval({
+      sets: ['3ra'],
+      excluding: ['3M', '3m', '-3m']
+    })
+    expect(result.name).toBe('-3M')
   })
 })
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 
-import IntervalsActions from 'Redux/Intervals'
+import IntervalsActions, { allowsNoRepeat } from 'Redux/Intervals'
 import Button, { ButtonBar, CheckableButton } from 'Components/Button'
 import MainPanel from 'Components/Panels'
 import Picker from 'Components/Picker'
@@ -58,6 +58,8 @@ class IntervalsConfig extends Component {
       rootNote,
       randomRootNote,
       drillLength,
+      repeatIntervals,
+      allowsNoRepeat,
       setConfig
     } = this.props
     return (
@@ -73,6 +75,14 @@ class IntervalsConfig extends Component {
             value={drillLength}
             options={{ '5': 5, '10': 10, '20': 20, '\u221E': false }}
             onSelect={drillLength => setConfig({ drillLength })}
+          />
+        </ConfigSection>
+        <ConfigSection title="Repetir intervalos iguales:">
+          <Picker
+            disabled={!allowsNoRepeat}
+            value={allowsNoRepeat ? repeatIntervals : true}
+            options={{ Si: true, No: false }}
+            onSelect={repeatIntervals => setConfig({ repeatIntervals })}
           />
         </ConfigSection>
         <ConfigSection title="Intervalos a partir de:">
@@ -97,7 +107,10 @@ class IntervalsConfig extends Component {
   }
 }
 
-const mapStateToProps = state => state.intervals.config
+const mapStateToProps = state => ({
+  ...state.intervals.config,
+  allowsNoRepeat: allowsNoRepeat(state.intervals)
+})
 
 const mapDispatchToProps = IntervalsActions
 

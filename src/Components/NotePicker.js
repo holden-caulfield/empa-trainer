@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import { props as noteProps, build } from 'tonal-note'
+import CheckableOption from 'Components/CheckableOption'
 
 const notes = ['Do', 'Re', 'Mi', 'Fa', 'Sol', 'La', 'Si']
 
@@ -14,28 +15,6 @@ const NotesSelect = styled.select`
     font-size: 20px;
     width: 70px;
     height: 40px;
-  }
-`
-
-const CheckableOption = styled.button`
-  border: 0;
-  background-color: transparent;
-  font-size: 30px;
-  padding: 0;
-  width: 30px;
-  height: 50px;
-  color: ${({ selected }) => (selected ? 'black' : 'lightgrey')};
-  @media (max-width: 720px) {
-    font-size: 25px;
-    width: 25px;
-    height: 40px;
-  }
-  :hover {
-    text-shadow: 1px 1px 5px black;
-  }
-  :disabled {
-    text-shadow: none;
-    color: lightgrey;
   }
 `
 

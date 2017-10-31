@@ -11,6 +11,7 @@ const BaseButton = styled.button.attrs({
   font-family: 'Work Sans';
   background-color: ${props => props.color};
   color: ${themeColor('textColor', 'light')};
+  opacity: ${props => (props.disabled ? 0.3 : 1)};
   &:hover {
     box-shadow: ${makeBox};
   }

@@ -4,10 +4,11 @@ import { intervalFrom as ivl } from 'lib/music'
 describe('reducer', () => {
   it('adds a random interval when exercise starts', () => {
     const { interval } = reducer(
-      { config: { intervalRange: ['2da', '6ta'] } },
+      { config: { intervalRange: ['2da'] } },
       Actions.start()
     )
     expect(interval).not.toBeNull()
+    expect(['2M', '-2M', '2m', '-2m']).toContain(interval.name)
   })
 
   it('properly registers a given answer', () => {

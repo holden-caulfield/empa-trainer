@@ -4,14 +4,12 @@ import styled from 'styled-components'
 
 const ButtonPanel = styled.div`
   display: flex;
-  flex-flow: row wrap;
-  width: 100%;
-  justify-content: space-between;
+  flex-flow: row nowrap;
 `
 
 export default class IntervalPicker extends Component {
   render() {
-    const { value, onSelect, options } = this.props
+    const { value, onSelect, options, disabled } = this.props
     const isSelected = option => option === value
     const clickHandler = option => () => {
       onSelect(option)
@@ -23,6 +21,7 @@ export default class IntervalPicker extends Component {
           <PickerButton
             color="dark"
             key={key}
+            disabled={disabled}
             onClick={clickHandler(options[key])}
             selected={isSelected(options[key])}
           >

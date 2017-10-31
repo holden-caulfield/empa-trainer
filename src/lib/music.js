@@ -2,7 +2,7 @@ import { chromatic } from 'tonal-range'
 import { shuffle } from 'tonal-array'
 import { pc } from 'tonal-note'
 import { transpose } from 'tonal-distance'
-import { head, tail, chain } from 'ramda'
+import { head, tail, chain, without } from 'ramda'
 import { props, build } from 'tonal-interval'
 
 const randomPick = list => shuffle(list)[0]
@@ -46,10 +46,14 @@ export const setOf = interval =>
     intervalSets[name].includes(build({ ...props(interval), dir: 1 }))
   )
 
-export const randomInterval = (intervalSets, rootNote = false) =>
+export const randomInterval = ({
+  sets = intervalOptions,
+  rootNote = false,
+  excluding = []
+}) =>
   intervalFrom(
     rootNote ? rootNote : randomNote(),
-    randomPick(expandIntervalSets(intervalSets))
+    randomPick(without(excluding, expandIntervalSets(sets)))
   )
 
 export const intervalFrom = (note, name) => ({

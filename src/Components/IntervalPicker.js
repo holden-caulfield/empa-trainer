@@ -32,6 +32,7 @@ const IntervalPickerButton = PickerButton.extend`
   font-weight: 600;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
   font-size: 20px;
+  opacity: ${props => (props.disabled && !props.selected ? 0.5 : 1)};
   @media (max-width: 400px) {
     width: 60px;
   }

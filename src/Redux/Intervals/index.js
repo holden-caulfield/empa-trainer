@@ -6,7 +6,7 @@ import {
   setOf
 } from 'lib/music'
 import { playInterval } from 'lib/player'
-import { append, filter, groupBy, map } from 'ramda'
+import { append, filter, groupBy, map, path } from 'ramda'
 import 'rxjs/add/operator/do'
 import 'rxjs/add/operator/mapTo'
 
@@ -15,6 +15,7 @@ import 'rxjs/add/operator/mapTo'
 const INITIAL_STATE = {
   config: {
     intervalRange: intervalOptions,
+    repeatIntervals: true,
     rootNote: 'C4',
     randomRootNote: true,
     drillLength: false
@@ -38,10 +39,6 @@ const { Types, Creators } = createActions({
 
 export default Creators
 
-/* ------------- Helpers ------------- */
-const drillIsOver = ({ historic, config }) =>
-  config.drillLength && historic.length >= config.drillLength
-
 /* ------------- Reducers ------------- */
 const setConfig = (state, { newConfig }) => ({
   ...state,
@@ -50,14 +47,24 @@ const setConfig = (state, { newConfig }) => ({
 
 const start = state => {
   if (drillIsOver(state)) return state
-  const { randomRootNote, intervalRange, rootNote } = state.config
+  const {
+    randomRootNote,
+    intervalRange,
+    rootNote,
+    repeatIntervals
+  } = state.config
   return {
     ...state,
     ready: false,
     answer: null,
-    interval: randomRootNote
-      ? randomInterval(intervalRange)
-      : randomInterval(intervalRange, rootNote)
+    interval: randomInterval({
+      sets: intervalRange,
+      rootNote: randomRootNote ? false : rootNote,
+      excluding:
+        repeatIntervals || !allowsNoRepeat(state)
+          ? []
+          : map(path(['interval', 'name']), state.historic)
+    })
   }
 }
 
@@ -96,10 +103,17 @@ export const epic = (action$, store) =>
     .mapTo(Creators.ready())
 
 /* ------------- Selectors ------------- */
-export const hasNext = state => !drillIsOver(state.intervals)
+export const drillIsOver = ({ historic, config }) =>
+  config.drillLength && historic.length >= config.drillLength
+
+export const allowsNoRepeat = state => {
+  const { intervalRange, drillLength } = state.config
+  if (drillLength === false) return false
+  return drillLength <= expandIntervalSets(intervalRange).length
+}
 
 export const expandSelectedIntervals = state =>
-  expandIntervalSets(state.intervals.config.intervalRange, false)
+  expandIntervalSets(state.config.intervalRange, false)
 
 export const progressStats = state => {
   const { historic } = state.intervals

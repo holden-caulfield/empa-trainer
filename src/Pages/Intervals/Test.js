@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import IntervalsActions, {
   expandSelectedIntervals,
-  hasNext
+  drillIsOver
 } from 'Redux/Intervals'
 import MainPanel from 'Components/Panels'
 import Button, { SecondaryButton, ButtonBar } from 'Components/Button'
@@ -34,7 +34,7 @@ class IntervalsTest extends Component {
       possibleIntervals,
       replay,
       nextInterval,
-      hasNext,
+      drillIsOver,
       sendAnswer
     } = this.props
     return interval ? (
@@ -54,7 +54,7 @@ class IntervalsTest extends Component {
           />
           <ButtonBar>
             <SecondaryButton onClick={this.stop}>Terminar</SecondaryButton>
-            {hasNext && <Button onClick={nextInterval}>Siguiente</Button>}
+            {!drillIsOver && <Button onClick={nextInterval}>Siguiente</Button>}
           </ButtonBar>
         </ControlsContainer>
       </MainPanel>
@@ -66,8 +66,8 @@ class IntervalsTest extends Component {
 
 const mapStateToProps = state => ({
   ...state.intervals,
-  possibleIntervals: expandSelectedIntervals(state),
-  hasNext: hasNext(state)
+  possibleIntervals: expandSelectedIntervals(state.intervals),
+  drillIsOver: drillIsOver(state.intervals)
 })
 
 const mapDispatchToProps = {
