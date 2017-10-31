@@ -65,6 +65,10 @@ export const PickerButton = BaseButton.extend`
   font-size: 24px;
   margin: 10px 10px 0 0;
   font-weight: 300;
+  @media (max-width: 400px) {
+    height: 60px;
+    width: 60px;
+  }
 `
 export const ButtonBar = styled.div`
   display: flex;

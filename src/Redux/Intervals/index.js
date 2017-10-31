@@ -1,14 +1,32 @@
 import { createReducer, createActions } from 'reduxsauce'
 import {
   randomInterval,
+  randomNote,
   intervalOptions,
   expandIntervalSets,
   setOf
 } from 'lib/music'
 import { playInterval } from 'lib/player'
-import { append, filter, groupBy, map, path } from 'ramda'
+import { append, filter, groupBy, map, path, omit, equals } from 'ramda'
 import 'rxjs/add/operator/do'
 import 'rxjs/add/operator/mapTo'
+
+const CONFIG_PRESETS = {
+  PRACTICA: () => ({
+    intervalRange: intervalOptions,
+    repeatIntervals: true,
+    rootNote: 'C4',
+    randomRootNote: true,
+    drillLength: false
+  }),
+  PABLO: () => ({
+    intervalRange: intervalOptions,
+    repeatIntervals: false,
+    rootNote: randomNote(['C4', 'B4']),
+    randomRootNote: false,
+    drillLength: 10
+  })
+}
 
 /* ------------- Initial State ------------- */
 
@@ -30,6 +48,7 @@ const INITIAL_STATE = {
 
 const { Types, Creators } = createActions({
   setConfig: ['newConfig'],
+  setPreset: ['preset'],
   start: null,
   ready: null,
   replay: null,
@@ -81,6 +100,11 @@ const stop = state => ({
   config: state.config
 })
 
+const setPreset = (state, { preset }) => ({
+  ...state,
+  config: CONFIG_PRESETS[preset]()
+})
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
@@ -88,7 +112,8 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.ANSWER]: answer,
   [Types.READY]: ready,
   [Types.STOP]: stop,
-  [Types.SET_CONFIG]: setConfig
+  [Types.SET_CONFIG]: setConfig,
+  [Types.SET_PRESET]: setPreset
 })
 
 /* ------------- Epics ------------- */
@@ -127,4 +152,15 @@ export const progressStats = state => {
     ...stats(historic),
     byGroup: map(stats, groupBy(intervalSet, historic))
   }
+}
+
+export const preset = state => {
+  const checkPreset = (accum, value) =>
+    equals(
+      omit(['rootNote'], state.config),
+      omit(['rootNote'], CONFIG_PRESETS[value]())
+    )
+      ? value
+      : accum
+  return Object.keys(CONFIG_PRESETS).reduce(checkPreset, null)
 }

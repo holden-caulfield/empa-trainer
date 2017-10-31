@@ -2,12 +2,13 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 
-import IntervalsActions, { allowsNoRepeat } from 'Redux/Intervals'
+import IntervalsActions, { allowsNoRepeat, preset } from 'Redux/Intervals'
 import Button, { ButtonBar, CheckableButton } from 'Components/Button'
 import MainPanel from 'Components/Panels'
 import Picker from 'Components/Picker'
 import NotePicker from 'Components/NotePicker'
 import IntervalRangePicker from 'Components/IntervalRangePicker'
+import CheckableOption from 'Components/CheckableOption'
 
 const SectionContainer = styled.div`
   width: calc(100% - 40px);
@@ -17,6 +18,7 @@ const SectionContainer = styled.div`
     font-size: 20px;
   }
 `
+
 const SectionControls = styled.div`
   display: flex;
   flex-direction: row;
@@ -33,6 +35,16 @@ const SectionButton = CheckableButton.extend`
     height: 40px;
   }
 `
+
+const ModeSection = styled.div`
+  padding-top: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+`
+
+const ModeLabel = styled.span`text-transform: capitalize;`
 
 const ConfigSection = props => (
   <SectionContainer>
@@ -59,11 +71,24 @@ class IntervalsConfig extends Component {
       randomRootNote,
       drillLength,
       repeatIntervals,
+      preset,
       allowsNoRepeat,
+      setPreset,
       setConfig
     } = this.props
     return (
       <MainPanel>
+        <ModeSection>
+          {['PABLO', 'PRACTICA'].map(presetOption => (
+            <CheckableOption
+              key={presetOption}
+              selected={preset === presetOption}
+              onClick={() => setPreset(presetOption)}
+            >
+              <ModeLabel>Modo {presetOption.toLowerCase()}</ModeLabel>
+            </CheckableOption>
+          ))}
+        </ModeSection>
         <ConfigSection title="Incluir intervalos de:">
           <IntervalRangePicker
             selected={intervalRange}
@@ -109,7 +134,8 @@ class IntervalsConfig extends Component {
 
 const mapStateToProps = state => ({
   ...state.intervals.config,
-  allowsNoRepeat: allowsNoRepeat(state.intervals)
+  allowsNoRepeat: allowsNoRepeat(state.intervals),
+  preset: preset(state.intervals)
 })
 
 const mapDispatchToProps = IntervalsActions

@@ -10,6 +10,9 @@ const CheckableOption = styled.button`
     font-size: 25px;
     height: 40px;
   }
+  @media (max-width: 320px) {
+    font-size: 20px;
+  }
   :hover {
     text-shadow: 1px 1px 5px black;
   }
