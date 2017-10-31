@@ -72,7 +72,6 @@ export default class NavBar extends Component {
       <NavBarContainer>
         <LeftIcon className="left" name="bars" onClick={onLeftIcon} />
         <TitleContainer>
-          <img src={imagePath('iso.svg')} alt="" />
           <span>{title}</span>
         </TitleContainer>
         {rightIcon ? (
