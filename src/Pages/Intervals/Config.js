@@ -77,7 +77,7 @@ class IntervalsConfig extends Component {
             onSelect={drillLength => setConfig({ drillLength })}
           />
         </ConfigSection>
-        <ConfigSection title="Repetir intervalos iguales:">
+        <ConfigSection title="Repetir intervalos similares:">
           <Picker
             disabled={!allowsNoRepeat}
             value={allowsNoRepeat ? repeatIntervals : true}
