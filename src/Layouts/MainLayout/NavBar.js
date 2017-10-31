@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import Icon from 'react-fontawesome'
-import { imagePath } from 'lib/images'
 
 const NavBarContainer = styled.header`
   display: flex;
