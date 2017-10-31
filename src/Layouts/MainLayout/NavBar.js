@@ -40,6 +40,11 @@ const TitleContainer = styled.h1`
   }
 `
 
+const Filler = styled.span`
+  height: 60px;
+  width: 60px;
+`
+
 const MenuIcon = styled(Icon)`
   font-size: 30px;
   height: 60px;
@@ -70,7 +75,11 @@ export default class NavBar extends Component {
           <img src={imagePath('iso.svg')} alt="" />
           <span>{title}</span>
         </TitleContainer>
-        <RightIcon name={rightIcon} onClick={onRightIcon} />
+        {rightIcon ? (
+          <RightIcon name={rightIcon} onClick={onRightIcon} />
+        ) : (
+          <Filler />
+        )}
       </NavBarContainer>
     )
   }
