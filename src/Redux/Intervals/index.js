@@ -31,13 +31,7 @@ const CONFIG_PRESETS = {
 /* ------------- Initial State ------------- */
 
 const INITIAL_STATE = {
-  config: {
-    intervalRange: intervalOptions,
-    repeatIntervals: true,
-    rootNote: 'C4',
-    randomRootNote: true,
-    drillLength: false
-  },
+  config: CONFIG_PRESETS.PRACTICA(),
   interval: null,
   answer: null,
   ready: false,
