@@ -55,10 +55,27 @@ const withCheckable = css`
   color: ${themeColorIfProp('selected', 'light', 'disabled')};
 `
 
-export const CheckableButton = Button.extend`${withCheckable};`
+const wide = css`
+  flex-grow: 1;
+  flex-shrink: 0;
+`
+
+export const CheckableButton = Button.extend`
+  ${withCheckable};
+  margin: 0 20px;
+  max-width: 160px;
+  height: 50px;
+  font-weight: ${props => (props.selected ? 600 : 300)};
+  @media (max-width: 720px) {
+    font-size: 15px;
+    max-width: 130px;
+    height: 40px;
+  }
+`
 
 export const PickerButton = BaseButton.extend`
   ${withCheckable};
+  ${props => (props.wide ? wide : '')};
   width: 70px;
   height: 70px;
   border-radius: 15px;
@@ -70,6 +87,7 @@ export const PickerButton = BaseButton.extend`
     width: 60px;
   }
 `
+
 export const ButtonBar = styled.div`
   display: flex;
   flex-direction: row;

@@ -9,49 +9,7 @@ import Picker from 'Components/Picker'
 import NotePicker from 'Components/NotePicker'
 import IntervalRangePicker from 'Components/IntervalRangePicker'
 import CheckableOption from 'Components/CheckableOption'
-
-const SectionContainer = styled.div`
-  width: calc(100% - 40px);
-  padding: 0 20px;
-  margin-bottom: 10px;
-  h2 {
-    font-size: 20px;
-  }
-`
-
-const SectionControls = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-`
-const SectionButton = CheckableButton.extend`
-  margin: 0 20px;
-  max-width: 160px;
-  height: 50px;
-  font-weight: ${props => (props.selected ? 600 : 300)};
-  @media (max-width: 720px) {
-    font-size: 15px;
-    max-width: 130px;
-    height: 40px;
-  }
-`
-
-const ModeSection = styled.div`
-  padding-top: 10px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  width: 100%;
-`
-
-const ModeLabel = styled.span`text-transform: capitalize;`
-
-const ConfigSection = props => (
-  <SectionContainer>
-    <h2>{props.title}</h2>
-    <SectionControls>{props.children}</SectionControls>
-  </SectionContainer>
-)
+import ConfigSection from 'Components/ConfigSection'
 
 class IntervalsConfig extends Component {
   componentWillMount() {
@@ -78,17 +36,14 @@ class IntervalsConfig extends Component {
     } = this.props
     return (
       <MainPanel>
-        <ModeSection>
-          {['PABLO', 'PRACTICA'].map(presetOption => (
-            <CheckableOption
-              key={presetOption}
-              selected={preset === presetOption}
-              onClick={() => setPreset(presetOption)}
-            >
-              <ModeLabel>Modo {presetOption.toLowerCase()}</ModeLabel>
-            </CheckableOption>
-          ))}
-        </ModeSection>
+        <ConfigSection title="Ajustes Predeterminados">
+          <Picker
+            wide
+            value={preset}
+            options={{ 'Modo Pablo': 'PABLO', 'Modo Práctica': 'PRACTICA' }}
+            onSelect={setPreset}
+          />
+        </ConfigSection>
         <ConfigSection title="Incluir intervalos de:">
           <IntervalRangePicker
             selected={intervalRange}
@@ -116,13 +71,13 @@ class IntervalsConfig extends Component {
             onChange={rootNote => setConfig({ rootNote })}
             value={rootNote}
           />
-          <SectionButton
+          <CheckableButton
             color="dark"
             selected={randomRootNote}
             onClick={() => setConfig({ randomRootNote: !randomRootNote })}
           >
             Aleatorio
-          </SectionButton>
+          </CheckableButton>
         </ConfigSection>
         <ButtonBar>
           <Button onClick={this.startTest}>Empezar</Button>
