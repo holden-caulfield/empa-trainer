@@ -1,5 +1,6 @@
 import About from './About'
 import Intervals, { Info as IntervalsInfo } from './Intervals'
+import Progressions from './Progressions'
 
 export default [
   {
@@ -10,6 +11,14 @@ export default [
       title: 'Intervalos',
       infoSection: IntervalsInfo,
       infoIcon: 'area-chart'
+    }
+  },
+  {
+    name: 'progressions',
+    route: '/progressions',
+    component: Progressions,
+    props: {
+      title: 'Dictado Armónico'
     }
   },
   {

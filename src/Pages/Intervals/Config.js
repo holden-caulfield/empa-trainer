@@ -1,15 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import styled from 'styled-components'
 
 import IntervalsActions, { allowsNoRepeat, preset } from 'Redux/Intervals'
 import Button, { ButtonBar, CheckableButton } from 'Components/Button'
 import MainPanel from 'Components/Panels'
+import ConfigSection from 'Components/ConfigSection'
 import Picker from 'Components/Picker'
 import NotePicker from 'Components/NotePicker'
 import IntervalRangePicker from 'Components/IntervalRangePicker'
-import CheckableOption from 'Components/CheckableOption'
-import ConfigSection from 'Components/ConfigSection'
 
 class IntervalsConfig extends Component {
   componentWillMount() {
