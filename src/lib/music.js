@@ -77,3 +77,17 @@ export const toItalian = note => {
   const pitch = pc(note)
   return `${notesMap[head(pitch)]}${tail(pitch)}`
 }
+
+export const scalesMap = {
+  ionic: 'Jónica',
+  doric: 'Dórica',
+  phrygian: 'Frigia',
+  lydian: 'Lidia',
+  mixolydian: 'Mixolidia',
+  aeolian: 'Eólica',
+  locrian: 'Locria'
+}
+
+export const scaleOptions = Object.keys(scalesMap).map(
+  scale => scalesMap[scale]
+) // Object.values(scalesMap)
