@@ -1,5 +1,6 @@
 import About from './About'
 import Intervals, { Info as IntervalsInfo } from './Intervals'
+import Scales from './Scales'
 
 export default [
   {
@@ -10,6 +11,14 @@ export default [
       title: 'Intervalos',
       infoSection: IntervalsInfo,
       infoIcon: 'area-chart'
+    }
+  },
+  {
+    name: 'scales',
+    route: '/scales',
+    component: Scales,
+    props: {
+      title: 'Escalas'
     }
   },
   {

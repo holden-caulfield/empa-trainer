@@ -4,10 +4,12 @@ import Reactotron from 'reactotron-react-js'
 
 import { reducer as intervals, epic as intervalsEpic } from './Intervals'
 import { reducer as panels } from './Panels'
+import { reducer as scales } from './Scales'
 
 const rootReducer = combineReducers({
   intervals,
-  panels
+  panels,
+  scales
 })
 
 const rootEpic = combineEpics(intervalsEpic)

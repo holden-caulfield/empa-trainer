@@ -88,3 +88,17 @@ export const ButtonBar = styled.div`
     margin-right: 0;
   }
 `
+
+export const ConfigButton = CheckableButton.extend.attrs({
+  color: themeColor('color', 'dark')
+})`
+margin: 0 20px;
+max-width: 160px;
+height: 50px;
+font-weight: ${props => (props.selected ? 600 : 300)};
+@media (max-width: 720px) {
+  font-size: 15px;
+  max-width: 130px;
+  height: 40px;
+}
+`
