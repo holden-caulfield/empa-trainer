@@ -44,7 +44,9 @@ const ModeSection = styled.div`
   width: 100%;
 `
 
-const ModeLabel = styled.span`text-transform: capitalize;`
+const ModeLabel = styled.span`
+  text-transform: capitalize;
+`
 
 const ConfigSection = props => (
   <SectionContainer>

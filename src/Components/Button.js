@@ -55,7 +55,9 @@ const withCheckable = css`
   color: ${themeColorIfProp('selected', 'light', 'disabled')};
 `
 
-export const CheckableButton = Button.extend`${withCheckable};`
+export const CheckableButton = Button.extend`
+  ${withCheckable};
+`
 
 export const PickerButton = BaseButton.extend`
   ${withCheckable};

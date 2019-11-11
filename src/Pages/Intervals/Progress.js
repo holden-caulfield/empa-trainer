@@ -71,7 +71,8 @@ class IntervalsProgress extends Component {
           <h2>Por tipo de intervalo</h2>
           {setsWithStats.map(intervalSet => (
             <StatsLabel key={intervalSet}>
-              {intervalSet}:{byGroup[intervalSet].correct}/{byGroup[intervalSet].total}
+              {intervalSet}:{byGroup[intervalSet].correct}/
+              {byGroup[intervalSet].total}
             </StatsLabel>
           ))}
         </ProgressSection>
