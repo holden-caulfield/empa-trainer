@@ -118,11 +118,11 @@ export const reducer = createReducer(INITIAL_STATE, {
 
 /* ------------- Epics ------------- */
 
-export const epic = (action$, store) =>
+export const epic = (action$, state$) =>
   action$
     .ofType(Types.START, Types.REPLAY)
     .do(() => {
-      const currentState = store.getState().intervals
+      const currentState = state$.value.intervals
       !drillIsOver(currentState) && playInterval(currentState.interval)
     })
     .mapTo(Creators.ready())
@@ -142,7 +142,6 @@ export const expandSelectedIntervals = state =>
 
 export const progressStats = state => {
   const { historic } = state.intervals
-  console.log(historic)
   const answerOk = ({ interval, answer }) => answer === interval.name
   const intervalSet = ({ interval }) => setOf(interval.name)
   const stats = intervals => ({

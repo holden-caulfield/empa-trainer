@@ -1,4 +1,4 @@
-import { combineReducers, applyMiddleware } from 'redux'
+import { combineReducers, applyMiddleware, createStore, compose } from 'redux'
 import { combineEpics, createEpicMiddleware } from 'redux-observable'
 import Reactotron from 'reactotron-react-js'
 
@@ -11,8 +11,15 @@ const rootReducer = combineReducers({
 })
 
 const rootEpic = combineEpics(intervalsEpic)
+const epicMiddleware = createEpicMiddleware()
 
-const middlewares = [createEpicMiddleware(rootEpic)]
+const middlewares = [epicMiddleware]
 
-export default () =>
-  Reactotron.createStore(rootReducer, applyMiddleware(...middlewares))
+export default () => {
+  const store = createStore(
+    rootReducer,
+    compose(applyMiddleware(...middlewares), Reactotron.createEnhancer())
+  )
+  epicMiddleware.run(rootEpic)
+  return store
+}
