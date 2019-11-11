@@ -1,9 +1,7 @@
-import { chromatic } from 'tonal-range'
-import { shuffle } from 'tonal-array'
-import { pc } from 'tonal-note'
-import { transpose } from 'tonal-distance'
-import { head, tail, chain, without } from 'ramda'
-import { props, build } from 'tonal-interval'
+import { chromatic } from '@tonaljs/range'
+import { shuffle } from '@tonaljs/array'
+import { note, transpose, interval } from '@tonaljs/tonal'
+import { chain, without } from 'ramda'
 
 const randomPick = list => shuffle(list)[0]
 
@@ -19,17 +17,15 @@ const intervalSets = {
   '8va': ['8P']
 }
 
-const lift = interval =>
-  typeof interval === 'string' ? props(interval) : interval
+const liftInterval = intervalDesc =>
+  typeof intervalDesc === 'string' ? interval(intervalDesc) : intervalDesc
 
-const quality = interval => build({ ...lift(interval), dir: 1 })
-
-const direction = interval => lift(interval).dir
-
-export const interval = {
-  quality,
-  direction
+export const ivlQuality = interval => {
+  const ivl = liftInterval(interval)
+  return `${Math.abs(ivl.num)}${ivl.q}`
 }
+
+export const ivlDirection = interval => liftInterval(interval).dir
 
 export const expandIntervalSets = (sets, ascDes = true) =>
   chain(
@@ -44,7 +40,7 @@ export const intervalOptions = Object.keys(intervalSets)
 
 export const setOf = interval =>
   intervalOptions.find(name =>
-    intervalSets[name].includes(build({ ...props(interval), dir: 1 }))
+    intervalSets[name].includes(ivlQuality(interval))
   )
 
 export const randomInterval = ({
@@ -73,7 +69,7 @@ const notesMap = {
   G: 'Sol'
 }
 
-export const toItalian = note => {
-  const pitch = pc(note)
-  return `${notesMap[head(pitch)]}${tail(pitch)}`
+export const toItalian = noteName => {
+  const noteObj = note(noteName)
+  return `${notesMap[noteObj.letter]}${noteObj.acc}`
 }

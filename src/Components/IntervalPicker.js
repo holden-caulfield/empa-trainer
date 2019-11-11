@@ -2,9 +2,8 @@ import React, { Component } from 'react'
 import { PickerButton } from 'Components/Button'
 import styled from 'styled-components'
 import Icon from 'react-fontawesome'
-import { props, build } from 'tonal-interval'
-import { pick, none, isNil, values } from 'ramda'
-import { interval as ivl } from 'lib/music'
+import { ivlDirection, ivlQuality } from 'lib/music'
+import { none, isNil, values } from 'ramda'
 
 const IntervalPickerContainer = styled.div`
   display: flex;
@@ -47,13 +46,13 @@ const directions = [
   { name: 'descendente', dir: -1, icon: 'arrow-down' }
 ]
 
-const INITIAL_STATE = { num: null, alt: null, dir: null }
+const INITIAL_STATE = { quality: null, dir: null }
 
 export default class IntervalPicker extends Component {
   state = INITIAL_STATE
 
   setQuality = quality => {
-    this.setState(pick(['num', 'alt'], props(quality)))
+    this.setState({ quality })
   }
 
   setDirection = dir => {
@@ -69,7 +68,8 @@ export default class IntervalPicker extends Component {
   componentDidUpdate() {
     const { answer, onIntervalSelected } = this.props
     if (this.stateComplete() && !answer) {
-      onIntervalSelected(build(this.state))
+      const { dir, quality } = this.state
+      onIntervalSelected(`${dir === -1 ? '-' : ''}${quality}`)
     }
   }
 
@@ -88,10 +88,10 @@ export default class IntervalPicker extends Component {
         <IntervalsContainer>
           {possibleIntervals.map(quality => (
             <IntervalPickerButton
-              color={this.colorFor(ivl.quality)(quality)}
+              color={this.colorFor(ivlQuality)(quality)}
               key={quality}
               onClick={() => this.setQuality(quality)}
-              selected={quality === ivl.quality(this.state)}
+              selected={quality === this.state.quality}
               disabled={answer}
             >
               {quality}
@@ -102,7 +102,7 @@ export default class IntervalPicker extends Component {
           {directions.map(direction => (
             <IntervalPickerButton
               key={direction.name}
-              color={this.colorFor(ivl.direction)(direction.dir)}
+              color={this.colorFor(ivlDirection)(direction.dir)}
               selected={this.state.dir === direction.dir}
               onClick={() => this.setDirection(direction.dir)}
               disabled={answer}

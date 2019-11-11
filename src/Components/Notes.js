@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { toItalian } from 'lib/music'
 import { Flow as VF } from 'vexflow'
-import { props } from 'tonal-note'
+import { note as noteProps } from '@tonaljs/tonal'
 
 const staveNoteFor = note => {
-  const { pc, oct, acc } = props(note)
+  const { pc, oct, acc } = noteProps(note)
   const StaveNote = new VF.StaveNote({
     clef: 'treble',
     keys: [`${pc}/${oct}`],

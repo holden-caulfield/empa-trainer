@@ -4,6 +4,9 @@
   "private": true,
   "homepage": "https://holden-caulfield.github.io/empa-trainer",
   "dependencies": {
+    "@tonaljs/array": "^3.2.3",
+    "@tonaljs/range": "^3.2.4",
+    "@tonaljs/tonal": "^3.2.2",
     "chroma-js": "^1.3.4",
     "ramda": "^0.24.1",
     "react": "^15.6.1",
@@ -18,15 +21,12 @@
     "rxjs": "^5.4.3",
     "soundfont-player": "^0.10.6",
     "styled-components": "^2.2.1",
-    "tonal": "^1.0.0",
-    "tonal-range": "^1.0.0",
     "vexflow": "^1.2.84"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test":
-      "react-scripts test --env=jsdom --setupTestFrameworkScriptFile=./testBootstrap.js",
+    "test": "react-scripts test --env=jsdom --setupTestFrameworkScriptFile=./testBootstrap.js",
     "eject": "react-scripts eject",
     "prettier": "prettier --write \"src/**/*.{js,jsx}\"",
     "precommit": "lint-staged",
@@ -43,7 +43,10 @@
     "web-audio-test-api": "^0.5.2"
   },
   "lint-staged": {
-    "src/**/*.{js,jsx,json,css}": ["prettier --write", "git add"]
+    "src/**/*.{js,jsx,json,css}": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "prettier": {
     "singleQuote": true,

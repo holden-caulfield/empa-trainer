@@ -142,6 +142,7 @@ export const expandSelectedIntervals = state =>
 
 export const progressStats = state => {
   const { historic } = state.intervals
+  console.log(historic)
   const answerOk = ({ interval, answer }) => answer === interval.name
   const intervalSet = ({ interval }) => setOf(interval.name)
   const stats = intervals => ({

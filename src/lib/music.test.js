@@ -66,6 +66,13 @@ describe('toItalian', () => {
   })
 })
 
+describe('ivlQuality', () => {
+  it('gets the absolute quality of intervals', () => {
+    expect(M.ivlQuality('3M')).toBe('3M')
+    expect(M.ivlQuality('-2m')).toBe('2m')
+  })
+})
+
 describe('setOf', () => {
   it('gets the proper set for an interval', () => {
     expect(M.setOf('3M')).toBe('3ra')

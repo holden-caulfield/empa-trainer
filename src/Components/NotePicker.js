@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import { props as noteProps, build } from 'tonal-note'
+import { note } from '@tonaljs/tonal'
+import { toItalian } from 'lib/music'
 import CheckableOption from 'Components/CheckableOption'
 
-const notes = ['Do', 'Re', 'Mi', 'Fa', 'Sol', 'La', 'Si']
+const notes = ['C', 'D', 'E', 'F', 'G', 'A', 'B']
 
 const NotesSelect = styled.select`
   font-size: 25px;
@@ -26,36 +27,37 @@ export default class NotePicker extends Component {
   }
 
   changeNote = change => {
-    this.props.onChange(build({ ...noteProps(this.props.value), ...change }))
+    const { letter, oct, acc } = { ...note(this.props.value), ...change }
+    this.props.onChange(`${letter}${acc}${oct}`)
   }
 
   render = () => {
     const { disabled, value } = this.props
-    const { alt, step } = noteProps(value)
+    const { acc, letter } = note(value)
     return (
       <div>
         <NotesSelect
           disabled={disabled}
-          value={step}
-          onChange={e => this.changeNote({ step: e.target.value })}
+          value={letter}
+          onChange={e => this.changeNote({ letter: e.target.value })}
         >
           {notes.map((note, index) => (
-            <option value={index} key={note}>
-              {note}
+            <option value={note} key={note}>
+              {toItalian(note)}
             </option>
           ))}
         </NotesSelect>
         <CheckableOption
           disabled={disabled}
-          onClick={() => this.changeNote({ alt: alt === 1 ? 0 : 1 })}
-          selected={alt === 1}
+          onClick={() => this.changeNote({ acc: acc === '#' ? '' : '#' })}
+          selected={acc === '#'}
         >
           &#9839;
         </CheckableOption>
         <CheckableOption
           disabled={disabled}
-          onClick={() => this.changeNote({ alt: alt === -1 ? 0 : -1 })}
-          selected={alt === -1}
+          onClick={() => this.changeNote({ acc: acc === 'b' ? '' : 'b' })}
+          selected={acc === 'b'}
         >
           &#9837;
         </CheckableOption>
