@@ -73,3 +73,13 @@ export const toItalian = noteName => {
   const noteObj = note(noteName)
   return `${notesMap[noteObj.letter]}${noteObj.acc}`
 }
+
+const progressionSets = {
+  Maj: ['I, IV, V, I'],
+  Min: ['Im, IVm, V, Im'],
+  DS: ['I, V/IV, IV, I'],
+  IM: ['I, IV, IVm, I'],
+  Dis: ['I, I#, IIm, I']
+}
+
+export const progressionOptions = Object.keys(progressionSets)
