@@ -1,4 +1,5 @@
 import * as M from './music'
+import progressionSets from './progressionSets'
 
 describe('expandIntervalSets', () => {
   it('properlyExpands set names', () => {
@@ -79,5 +80,56 @@ describe('setOf', () => {
     expect(M.setOf('-3m')).toBe('3ra')
     expect(M.setOf('4A')).toBe('4/5')
     expect(M.setOf('-8P')).toBe('8va')
+  })
+})
+
+describe('expandProgressionSets', () => {
+  it('properlyExpands progressionNames names', () => {
+    const result = M.expandProgressionSets(['Min', 'DS'], ['Tri'])
+    expect(result).toContain('Im, IVm, V, Im')
+    expect(result).toContain('I, V/IV, IV, I')
+  })
+
+  it('considers type of chords', () => {
+    const result = M.expandProgressionSets(['Maj'], ['Tri', '7ma'])
+    expect(result).toContain('I, IV, V, I')
+    expect(result).toContain('IMaj7, IVMaj7, V7, IMaj7')
+  })
+})
+
+describe('expandChordProgression', () => {
+  it('properly handles #o7', () => {
+    const result = M.expandChordProgression({
+      rootNote: 'Db4',
+      chords: 'IIm7, II#o7, IIIm7, IMaj7'
+    })
+  })
+})
+
+describe('applyProgression', () => {
+  it('properly expands a chord progression', () => {
+    const result = M.applyProgression('C', 'I, IIm, V7, I')
+    expect(result).toEqual(['C', 'Dm', 'G7', 'C'])
+  })
+
+  it('considers secondary dominants', () => {
+    const result = M.applyProgression('C', 'I, V/IV, IV, I')
+    expect(result).toEqual(['C', 'C7', 'F', 'C'])
+  })
+
+  it('omits octaves', () => {
+    const result = M.applyProgression('C4', 'I, IIm, V7, I')
+    expect(result).toEqual(['C', 'Dm', 'G7', 'C'])
+  })
+
+  it('supports all progression sets', () => {
+    Object.values(progressionSets).forEach(set =>
+      Object.values(set).forEach(progressions => {
+        progressions.forEach(progression => {
+          const result = M.applyProgression('C4', progression)
+          expect(result.includes('')).toBe(false)
+        })
+      })
+    )
   })
 })

@@ -13,3 +13,17 @@ export const playInterval = interval => {
     piano.play(interval.noteTo, ac.currentTime + 1, { duration: 1 })
   })
 }
+
+export const playChord = (instrument, when, notes) => {
+  notes.forEach(note => {
+    instrument.play(note, when, { duration: 2 })
+  })
+}
+
+export const playProgression = chords => {
+  Soundfont.instrument(ac, 'acoustic_grand_piano').then(piano => {
+    chords.forEach((chord, i) => {
+      playChord(piano, ac.currentTime + i * 3, chord)
+    })
+  })
+}
