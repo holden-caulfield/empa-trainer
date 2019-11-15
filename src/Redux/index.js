@@ -1,13 +1,18 @@
 import { combineReducers, applyMiddleware, createStore, compose } from 'redux'
-import { combineEpics, createEpicMiddleware } from 'redux-observable'
 import Reactotron from 'reactotron-react-js'
+import { createLogicMiddleware } from 'redux-logic'
 
-import { reducer as intervals, epic as intervalsEpic } from './Intervals'
+import { reducer as intervals, Logics as intervalsLogics } from './Intervals'
 import {
   reducer as progressions,
-  epic as progressionsEpic
+  Logics as progressionsLogics
 } from './Progressions'
 import { reducer as panels } from './Panels'
+
+const logicMiddleware = createLogicMiddleware([
+  ...intervalsLogics,
+  ...progressionsLogics
+])
 
 const rootReducer = combineReducers({
   intervals,
@@ -15,16 +20,12 @@ const rootReducer = combineReducers({
   panels
 })
 
-const rootEpic = combineEpics(intervalsEpic, progressionsEpic)
-const epicMiddleware = createEpicMiddleware()
-
-const middlewares = [epicMiddleware]
+const middlewares = [logicMiddleware]
 
 export default () => {
   const store = createStore(
     rootReducer,
     compose(applyMiddleware(...middlewares), Reactotron.createEnhancer())
   )
-  epicMiddleware.run(rootEpic)
   return store
 }

@@ -1,4 +1,5 @@
 import { createReducer, createActions } from 'reduxsauce'
+import { createLogic } from 'redux-logic'
 import {
   progressionOptions,
   randomProgression,
@@ -64,13 +65,20 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.PROG_READY]: ready
 })
 
-/* ------------- Epics ------------- */
+/* ------------- Logics ------------- */
 
-export const epic = (action$, state$) =>
-  action$
-    .ofType(Types.PROG_START, Types.PROG_REPLAY)
-    .do(() => {
-      const currentState = state$.value.progressions
-      playProgression(expandChordProgression(currentState.progression))
-    })
-    .mapTo(Creators.progReady())
+const playbackLogic = createLogic({
+  type: [Types.PROG_START, Types.PROG_REPLAY],
+  latest: true,
+  processOptions: {
+    dispatchReturn: true,
+    successType: Creators.progReady
+  },
+  process: ({ getState }) => {
+    const currentState = getState().progressions
+    playProgression(expandChordProgression(currentState.progression))
+    return
+  }
+})
+
+export const Logics = [playbackLogic]

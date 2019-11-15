@@ -1,4 +1,6 @@
 import { createReducer, createActions } from 'reduxsauce'
+import { createLogic } from 'redux-logic'
+
 import {
   randomInterval,
   randomNote,
@@ -8,8 +10,6 @@ import {
 } from 'lib/music'
 import { playInterval } from 'lib/player'
 import { append, filter, groupBy, map, path, omit, equals } from 'ramda'
-import 'rxjs/add/operator/do'
-import 'rxjs/add/operator/mapTo'
 
 const CONFIG_PRESETS = {
   PRACTICA: () => ({
@@ -116,16 +116,23 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.SET_PRESET]: setPreset
 })
 
-/* ------------- Epics ------------- */
+/* ------------- Logics ------------- */
 
-export const epic = (action$, state$) =>
-  action$
-    .ofType(Types.START, Types.REPLAY)
-    .do(() => {
-      const currentState = state$.value.intervals
-      !drillIsOver(currentState) && playInterval(currentState.interval)
-    })
-    .mapTo(Creators.ready())
+const playbackLogic = createLogic({
+  type: [Types.START, Types.REPLAY],
+  latest: true,
+  processOptions: {
+    dispatchReturn: true,
+    successType: Creators.ready
+  },
+  process: ({ getState }) => {
+    const currentState = getState().intervals
+    !drillIsOver(currentState) && playInterval(currentState.interval)
+    return
+  }
+})
+
+export const Logics = [playbackLogic]
 
 /* ------------- Selectors ------------- */
 export const drillIsOver = ({ historic, config }) =>
