@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/empa-trainer/static/css/main.5b8c8a51.chunk.css",
-    "main.js": "/empa-trainer/static/js/main.1a08383b.chunk.js",
-    "main.js.map": "/empa-trainer/static/js/main.1a08383b.chunk.js.map",
+    "main.js": "/empa-trainer/static/js/main.a2ae51e7.chunk.js",
+    "main.js.map": "/empa-trainer/static/js/main.a2ae51e7.chunk.js.map",
     "runtime-main.js": "/empa-trainer/static/js/runtime-main.c17c90d1.js",
     "runtime-main.js.map": "/empa-trainer/static/js/runtime-main.c17c90d1.js.map",
     "static/js/2.2a79391c.chunk.js": "/empa-trainer/static/js/2.2a79391c.chunk.js",
     "static/js/2.2a79391c.chunk.js.map": "/empa-trainer/static/js/2.2a79391c.chunk.js.map",
     "index.html": "/empa-trainer/index.html",
-    "precache-manifest.bb2a1cfa41d5cbf71518daef1f13e272.js": "/empa-trainer/precache-manifest.bb2a1cfa41d5cbf71518daef1f13e272.js",
+    "precache-manifest.07cba7598fa649ec5e0a67824bece140.js": "/empa-trainer/precache-manifest.07cba7598fa649ec5e0a67824bece140.js",
     "service-worker.js": "/empa-trainer/service-worker.js",
     "static/css/main.5b8c8a51.chunk.css.map": "/empa-trainer/static/css/main.5b8c8a51.chunk.css.map"
   },
@@ -16,6 +16,6 @@
     "static/js/runtime-main.c17c90d1.js",
     "static/js/2.2a79391c.chunk.js",
     "static/css/main.5b8c8a51.chunk.css",
-    "static/js/main.1a08383b.chunk.js"
+    "static/js/main.a2ae51e7.chunk.js"
   ]
 }
