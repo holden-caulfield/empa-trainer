@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "05221f80d693c091af7e13299fa2e0ea",
+    "revision": "c921075fcf4f66c63d6cd9e2571e07d0",
     "url": "/empa-trainer/index.html"
   },
   {
-    "revision": "bef831bffd4f57ca26cd",
+    "revision": "1c9cb12bce4e1e55982d",
     "url": "/empa-trainer/static/css/main.5b8c8a51.chunk.css"
   },
   {
-    "revision": "87e38fbc59c2279a927c",
-    "url": "/empa-trainer/static/js/2.40cdf1c3.chunk.js"
+    "revision": "7205418cad5ed28fde0c",
+    "url": "/empa-trainer/static/js/2.cc24eaf8.chunk.js"
   },
   {
-    "revision": "bef831bffd4f57ca26cd",
-    "url": "/empa-trainer/static/js/main.05b401c6.chunk.js"
+    "revision": "1c9cb12bce4e1e55982d",
+    "url": "/empa-trainer/static/js/main.bedc3505.chunk.js"
   },
   {
     "revision": "879880cda8e4b35f2d88",
