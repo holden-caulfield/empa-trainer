@@ -27,3 +27,9 @@ export const playProgression = chords => {
     })
   })
 }
+
+export const playNote = note => {
+  Soundfont.instrument(ac, 'acoustic_grand_piano').then(piano => {
+    piano.play(note, ac.currentTime, { duration: 2 })
+  })
+}

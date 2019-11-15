@@ -36,6 +36,9 @@ const ProgressionsTest = props =>
           <Button onClick={props.replay}>
             <Icon name="volume-up" /> De nuevo!
           </Button>
+          <Button onClick={props.playRoot}>
+            <Icon name="volume-up" /> Dame la tónica!
+          </Button>
         </ButtonBar>
       </div>
       <ButtonBar>
@@ -59,6 +62,7 @@ const mapDispatchToProps = {
   nextProgression: ProgressionsActions.progStart,
   requestAnswer: ProgressionsActions.showProgAnswer,
   replay: ProgressionsActions.progReplay,
+  playRoot: ProgressionsActions.playRoot,
   stop: ProgressionsActions.progStop
 }
 

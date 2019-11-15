@@ -5,7 +5,7 @@ import {
   randomProgression,
   expandChordProgression
 } from 'lib/music'
-import { playProgression } from 'lib/player'
+import { playProgression, playNote } from 'lib/player'
 
 /* ------------- Initial State ------------- */
 
@@ -26,6 +26,7 @@ const { Types, Creators } = createActions({
   setProgConfig: ['newConfig'],
   progStart: null,
   progReplay: null,
+  playRoot: null,
   showProgAnswer: null,
   progReady: null,
   progStop: null
@@ -81,4 +82,18 @@ const playbackLogic = createLogic({
   }
 })
 
-export const Logics = [playbackLogic]
+const playRootLogic = createLogic({
+  type: [Types.PLAY_ROOT],
+  latest: true,
+  processOptions: {
+    dispatchReturn: true,
+    successType: Creators.progReady
+  },
+  process: ({ getState }) => {
+    const currentState = getState().progressions
+    playNote(currentState.progression.rootNote)
+    return
+  }
+})
+
+export const Logics = [playbackLogic, playRootLogic]
