@@ -36,6 +36,7 @@ export default class About extends Component {
           simplemente chusmear cómo esta hecho) el código fuente está&nbsp;
           <a href="https://github.com/holden-caulfield/empa-trainer">acá</a>
         </p>
+        <p>Version: 2.0</p>
       </TextContainer>
     </MainPanel>
   )
